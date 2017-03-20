@@ -17,15 +17,21 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
   </head>
 
   <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="gamesurface">
       <div class="col-md-8" id="canvasholder">
-        <canvas width="500" height="500" id="theCanvas"></canvas>
+        <canvas width="500" height="500" id="gamecanvas"></canvas>
+        <div id="canvasnameplate">
+          Cyberslug 2017<br/>
+          Dr. Rhanor Gillette et. al.<br/>
+          University of Illinois at Urbana-Champaign.<br/>
+          Copyright 2017 &copy; Mikhail Voloshin. All rights reserved.
+        </div>
       </div>
       <div class="col-md-2" id="animcontrols">
-          <button class="button">Button</button>
+          <button class="btn">Button</button>
       </div>
       <div class="col-md-2" id="animstates">
-          <button class="button">Button</button>
+          <button class="btn">Button</button>
       </div>
 
       <div class="row">
