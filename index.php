@@ -18,30 +18,33 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
   <body>
     <div class="container-fluid" id="gamesurface">
-      <div class="col-md-8" id="canvasholder">
+      <div class="col-md-8 oscilloscopepanel" id="canvasholder">
         <canvas width="500" height="500" id="gamecanvas"></canvas>
         <div id="canvasnameplate">
           Cyberslug 2017<br/>
           Dr. Rhanor Gillette et. al.<br/>
-          University of Illinois at Urbana-Champaign.<br/>
+          School of Molecular and Cellular Biology</br>
+          University of Illinois at Urbana-Champaign<br/>
           Copyright 2017 &copy; Mikhail Voloshin. All rights reserved.
         </div>
       </div>
-      <div class="col-md-2" id="animcontrols">
-          <button class="btn">Button</button>
+      <div class="col-md-4 col-sm-6">
+        <div class="oscilloscopepanel">
+          <div class="buttonrow">
+            <button class="btn skeuo" id="btn-stop"
+            /><button class="btn skeuo-main skeuo" id="btn-play"
+            /><button class="btn skeuo" id="btn-ff"
+            /><button class="btn skeuo" id="btn-step"
+            />
+          </div> <!-- buttonrow -->
+        </div> <!-- oscilloscopepanel -->
       </div>
-      <div class="col-md-2" id="animstates">
-          <button class="btn">Button</button>
+      <div class="col-md-4 col-sm-6">
+        <div class="oscilloscopepanel">
+          <button class="btn skeuo">Button</button>
+        </div>
       </div>
 
-      <div class="row">
-        <footer class="col-xs-12">
-          Copyright &copy; 2017 Mikhail Voloshin, for use by Dr. Rhanor Gillette
-          and associates at the University of Illinois at Urbana-Champaign.
-          Please direct any inquiries to omedalus -at- gmail.com.
-          All rights reserved.
-        </footer>
-      </div>
     </div> <!-- container-fluid -->
   </body>
     
