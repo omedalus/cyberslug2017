@@ -59,4 +59,4 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="yowskin.css?nocache=<?php echo time(); ?>"></link>
+<link rel="stylesheet" type="text/css" href="cyberslug.css?nocache=<?php echo time(); ?>"></link>
