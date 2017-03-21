@@ -40,47 +40,44 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
   var link = function(scope, element, attrs) {
     $(element).append('<div class="knob"></div>');
 
-    var dragCoords = null;
-    element.mousedown(function(e) {
-      dragCoords = {
-        x: e.pageX,
-        y: e.pageY,
-        val: scope.cyberslugDial
-      };
-    }).mouseup(function() {
-      dragCoords = null;
-    }).mouseleave(function() {
-      dragCoords = null;
-    }).mousemove(function(e) {
-      if (!dragCoords) {
-        return;
-      }
-      var xdiff = e.pageX - dragCoords.x;
-      var ydiff = -(e.pageY - dragCoords.y);
+    var setKnobToCursorEvent = function(e) {
+      var parentOffset = element.parent().offset();       
+      var x = e.pageX - parentOffset.left - (element.width() / 2);
+      var y = e.pageY - parentOffset.top - (element.height() / 2);
 
-      var sensitivity = scope.sensitivity;
-      if (!sensitivity) {
-        sensitivity =  element.width() / (scope.max - scope.min);
-      }
+      var angle = Math.atan2(y, x);
       
-      xdiff = parseInt(xdiff / sensitivity, 10);
-      ydiff = parseInt(ydiff / sensitivity, 10);
+      // Angle ranges from -PI to PI.
+      var scalepos = (angle + Math.PI) / (2 * Math.PI);
       
-      var diff = xdiff;
-      if (Math.abs(ydiff) > Math.abs(xdiff)) {
-        diff = ydiff;
-      }
+      // Scale starts at .25 because the dial starts at 
+      // the upward-pointing position.
+      scalepos = (scalepos + 0.75) % 1;
+
+      var newvalue = (scope.max - scope.min + 1) * scalepos + scope.min;
+      newvalue = parseInt(newvalue, 10);
       
-      scope.cyberslugDial = dragCoords.val + diff;
-      if (scope.cyberslugDial < scope.min) {
-        scope.cyberslugDial = scope.min;
-      }
-      if (scope.cyberslugDial > scope.max) {
-        scope.cyberslugDial = scope.max;
-      }
-      
+      scope.cyberslugDial = newvalue;
       scope.$apply();
-    });
+    };
+
+    var isMouseDown = false;
+    element.
+        mousedown(function(e) {
+          isMouseDown = true;
+          setKnobToCursorEvent(e);
+        }).
+        mouseup(function(e) {
+          isMouseDown = false;
+        }).
+        mouseleave(function(e) {
+          isMouseDown = false;
+        }).
+        mousemove(function(e) {
+          if (isMouseDown) {
+            setKnobToCursorEvent(e);
+          }
+        });
     
     scope.$watch('cyberslugDial', function(newValue, oldValue) {
       var knobPosition = 360 * (newValue - scope.min) / (scope.max - scope.min + 1);
