@@ -14,7 +14,11 @@
     },
     
     displaysettings: {
-      zoomscale: 1
+      viewportsize: 100,
+      tickinterval: {
+        major: 10,
+        minor: 1
+      }
     }
   };
 

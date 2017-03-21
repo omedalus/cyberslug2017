@@ -36,8 +36,8 @@ canvas {
 }
 
 .oscilloscopepanel {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
 
@@ -205,7 +205,7 @@ canvas {
 #buttonrow {
   white-space: nowrap;
   float: left;
-  padding: 30px;
+  padding: 20px;
   padding-top: 0;
 }
 #rca-jacks {
@@ -227,16 +227,16 @@ canvas {
 
 #dialrow {
   clear: both;
-  padding: 0 30px;
+  padding: 0 20px;
 }
 
 
 .dial {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .dial .base {
   background-image: url('img/control-dial-base.png');
