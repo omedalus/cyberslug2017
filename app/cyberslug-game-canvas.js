@@ -174,7 +174,9 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     
     clearFrame(context);
     
-    cyberslugApp.ANIMATIONS.hero.drawFrame(context);
+    if (!!$global.world) {
+      $global.world.drawFrame(context);
+    }
 
     drawAxes(context);
     drawScreenShadows(context);

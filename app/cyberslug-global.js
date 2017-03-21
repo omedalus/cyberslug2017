@@ -1,4 +1,5 @@
 /* global cyberslugApp */
+/* global getWorld */
 
 
 (function() {
@@ -19,7 +20,9 @@
         major: 10,
         minor: 1
       }
-    }
+    },
+    
+    world: getWorld()
   };
 
   cyberslugApp.factory('$global', [function() {

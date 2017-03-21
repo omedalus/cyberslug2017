@@ -11,11 +11,13 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     
     <!-- The cyberslugApp angularjs app -->
 
+    <script src="app/model/hero.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/model/world.js?nocache=<?php echo time(); ?>"></script>
+
     <script src="app/cyberslug-app.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-global.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-dial.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-game-canvas.js?nocache=<?php echo time(); ?>"></script>
-    <script src="app/model/hero.js?nocache=<?php echo time(); ?>"></script>
 
     <title>Cyberslug 2017</title>
   </head>

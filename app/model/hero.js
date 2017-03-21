@@ -1,5 +1,6 @@
-/* global cyberslugApp */
 /* global Image */
+
+var getHero = null;
 
 (function() {
   var wiggletick = 0;
@@ -22,16 +23,14 @@
     
     context.save();
     
-    context.rotate(wiggletick / 100);
-    
     // We scale to match our texture image.
     // And also because our hero isn't exactly a circle.
     context.scale(1/12, 1/10);
     
     // Make the slug look squishy and alive.
     context.scale(
-        1 + Math.cos(wiggletick / 10) * .05,
-        1 - Math.cos((wiggletick + 5) / 10) * .05
+        1 + Math.cos(wiggletick / 10) * .02,
+        1 - Math.cos((wiggletick + 5) / 10) * .02
     );
     
     // Oral front begin.
@@ -78,10 +77,10 @@
     
     context.beginPath();
     context.moveTo(30, -40);
-    context.lineTo(70, -70);
+    context.lineTo(70 + 5 * Math.cos(wiggletick / 7), -70);
     context.lineTo(40, -20);
     context.moveTo(-30, -40);
-    context.lineTo(-70, -70);
+    context.lineTo(-70 + 5 * Math.cos(wiggletick / 13), -70);
     context.lineTo(-40, -20);
     context.closePath();
     
@@ -89,7 +88,7 @@
     context.drawImage(textureImg, -80, -80);
     
     context.fillStyle = gradient;
-    context.fillRect(-70,-70, 140,140);    
+    context.fillRect(-80,-80, 160,160);    
     
     context.restore();
     // Antennae end.
@@ -110,5 +109,7 @@
   
   reset();
   
-  cyberslugApp.ANIMATIONS.hero = hero;
+  getHero = function() {
+    return hero;
+  };
 }());
