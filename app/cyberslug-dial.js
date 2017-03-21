@@ -1,40 +1,5 @@
-/* global angular */
 /* global $ */
-
-var cyberslugApp = angular.module('cyberslugApp', []);
-
-
-
-
-(function() {
-  var global = {
-    runstate: 'stop',
-    setup: {
-      population: {
-        hermissenda: 3,
-        flabellina: 10,
-        faux: 0
-      }
-    }
-  };
-  cyberslugApp.factory('$global', [function() {
-    return global;
-  }]); // end $global
-}());
-
-
-
-
-
-cyberslugApp.controller('SetupCtrl', [
-    '$scope', '$global', function($scope, $global) 
-{
-  var setupCtrl = this;
-  setupCtrl.$global = $global;
-}]);
-
-
-
+/* global cyberslugApp */
 
 cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
   var link = function(scope, element, attrs) {
@@ -48,14 +13,19 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
 
       var angle = Math.atan2(y, x);
       
-      // Angle ranges from -PI to PI.
+      // Angle ranges from -PI to PI. 
       var scalepos = (angle + Math.PI) / (2 * Math.PI);
-      
+
       // Scale starts at .25 because the dial starts at 
       // the upward-pointing position.
       scalepos = (scalepos + 0.75) % 1;
+      
+      // The last 3/4 of the scale don't count, because the dial
+      // doesn't go all the way around.
+      scalepos /= 0.75;
+      scalepos = Math.min(scalepos, 1);
 
-      var newvalue = (scope.max - scope.min + 1) * scalepos + scope.min;
+      var newvalue = (scope.max - scope.min) * scalepos + scope.min;
       newvalue = parseInt(newvalue, 10);
       
       scope.cyberslugDial = newvalue;
@@ -81,7 +51,7 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
         });
     
     scope.$watch('cyberslugDial', function(newValue, oldValue) {
-      var scalepos = 360 * (newValue - scope.min) / (scope.max - scope.min + 1);
+      var scalepos = 270 * (newValue - scope.min) / (scope.max - scope.min);
       $('.knob', element).css({
         transform: 'rotate(' + scalepos + 'deg)'
       });
@@ -98,7 +68,7 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
           tickelem.html(iTick + '<div class="tickmark">\u25ae</div>');
         }
         
-        var scalepos = 360 * (iTick - scope.min) / (scope.max - scope.min + 1);
+        var scalepos = 270 * (iTick - scope.min) / (scope.max - scope.min);
         tickelem.css({
           transform: 'rotate(' + scalepos + 'deg)'
         });
@@ -110,7 +80,7 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
     scope.$watch('tickInterval', rebuildTicks);
     
     scope.$watch('label', function(newValue) {
-      $('label', element).text(newValue);
+      $('label', element).text(newValue.toUpperCase());
     });
   };
   

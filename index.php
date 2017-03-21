@@ -11,15 +11,22 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     
     <!-- The cyberslugApp angularjs app -->
 
-    <script src="app/cyberslug-module.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-app.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-global.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-dial.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-game-canvas.js?nocache=<?php echo time(); ?>"></script>
 
     <title>Cyberslug 2017</title>
   </head>
 
   <body>
     <div class="container-fluid" id="gamesurface">
-      <div class="col-md-8 oscilloscopepanel" id="canvasholder">
-        <canvas width="500" height="500" id="gamecanvas"></canvas>
+      <div class="col-md-8 col-lg-6 oscilloscopepanel" id="canvasholder">
+        <canvas 
+            width="500" 
+            height="500" 
+            id="gamecanvas"
+            data-cyberslug-game-canvas=""></canvas>
         <div id="canvasnameplate">
           Cyberslug 2017<br/>
           Dr. Rhanor Gillette et. al.<br/>
@@ -28,7 +35,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           Copyright 2017 &copy; Mikhail Voloshin. All rights reserved.
         </div>
       </div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-4 col-sm-6 col-lg-6">
         <div class="oscilloscopepanel" data-ng-controller="SetupCtrl as setupCtrl">
           <div id="buttonrow">
             <button 
@@ -42,7 +49,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
           <div id="rca-jacks"></div>
         
-        {{setupCtrl.$global.setup.population.hermissenda}}
           <div id="dialrow">
             <div class="dial"
                 data-cyberslug-dial="setupCtrl.$global.setup.population.hermissenda"
@@ -50,25 +56,25 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"
-                data-number-interval="4"></div>
+                data-number-interval="5"></div>
             <div class="dial"
                 data-cyberslug-dial="setupCtrl.$global.setup.population.flabellina"
                 data-label="'flabellina'"
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"
-                data-number-interval="4"></div>
+                data-number-interval="5"></div>
             <div class="dial"
                 data-cyberslug-dial="setupCtrl.$global.setup.population.faux"
                 data-label="'faux'"
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"
-                data-number-interval="4"></div>
+                data-number-interval="5"></div>
           </div> <!-- dialrow -->
         </div> <!-- oscilloscopepanel -->
       </div>
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-4 col-sm-6 col-lg-6">
         <div class="oscilloscopepanel">
           <button class="btn skeuo">Button</button>
         </div>
