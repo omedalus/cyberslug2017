@@ -2,6 +2,7 @@
 
 var cyberslugApp = angular.module('cyberslugApp', []);
 
+cyberslugApp.ANIMATIONS = {};
 
 
 cyberslugApp.controller('SetupCtrl', [

@@ -1,9 +1,10 @@
 /* global $ */
+/* global _ */
 /* global cyberslugApp */
 
 cyberslugApp.directive('cyberslugGameCanvas', [
-    '$global', '$interval',
-    function($global, $interval) {
+    '$global', '$timeout',
+    function($global, $timeout) {
 
   var setCanvasZoom = function(context, element) {
     element = $(element);
@@ -21,6 +22,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
 
     var d = $global.displaysettings.viewportsize / 2;
 
+    context.beginPath();
     for (var itick = -d; itick <= d; itick += $global.displaysettings.tickinterval.major) {
       if (itick == 0) {
         continue;
@@ -33,7 +35,6 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     
     context.strokeStyle = '#000';
     context.stroke();
-
 
     context.beginPath();
     context.moveTo(-d, 0);
@@ -172,6 +173,8 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     setCanvasZoom(context, element);
     
     clearFrame(context);
+    
+    cyberslugApp.ANIMATIONS.hero.drawFrame(context);
 
     drawAxes(context);
     drawScreenShadows(context);
@@ -180,9 +183,34 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     context.restore();
   };
   
+  var animate = function(context, element) {
+    drawFrame(context, element);
+
+    var fps = 0;
+    if ($global.runstate === 'play') {
+      fps = 15;
+    } 
+    else if ($global.runstate === 'ff') {
+      fps = 30;
+    }
+
+    if (!fps) {
+      return;
+    }
+    
+    $timeout(function() {
+      animate(context, element);
+    }, 1000 / fps);
+  };
+  
   var link = function(scope, element, attrs) {
     var context = element[0].getContext('2d');
-    drawFrame(context, element);
+
+    scope.$global = $global;
+    
+    scope.$watch('$global.runstate', function(newValue, oldValue) {
+      animate(context, element);
+    });
   };
   
   return {
