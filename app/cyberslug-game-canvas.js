@@ -114,6 +114,38 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     context.restore();
   };
   
+  var drawScreenSpeculars = function(context) {
+    context.save();
+    var d = $global.displaysettings.viewportsize / 2;
+
+    // Scale the context so all coordinates are in the range [-1, 1].
+    // Much more sensible than multiplying by d everywhere.
+    context.scale(d, d);
+
+    // Top Left
+    context.beginPath();
+    context.moveTo(1, 0);
+    context.lineTo(.95, -0.68);
+    context.arcTo(.88, -.88, 0.68, -.88, 0.1);
+    context.lineTo(-0, -.88);
+    
+    //context.arcTo(-1, -1, -1, -0.68, 0.1);
+    //context.lineTo(-1, 0);
+    
+
+    //var gradient=context.createLinearGradient(0, -.88, -.05, -0.68);
+    var gradient=context.createRadialGradient(-.1,.1, 1.5, 0,.3, 1.15);
+    gradient.addColorStop(0, 'rgba(255,255,255,0)');
+    gradient.addColorStop(.5, 'rgba(100,200,255,0)');
+    gradient.addColorStop(.8, 'rgba(200,240,255,.2)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    
+    context.fillStyle = gradient;
+    context.fill();
+    
+    context.restore();
+  };  
+  
   var drawFrame = function(context, element) {
     context.save();
     
@@ -123,6 +155,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
 
     drawAxes(context);
     drawScreenShadows(context);
+    drawScreenSpeculars(context);
     
     context.restore();
   };
