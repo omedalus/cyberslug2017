@@ -4,7 +4,7 @@
 
 (function() {
   var global = {
-    runstate: 'stop',
+    runstate: 'play',
     
     setup: {
       population: {

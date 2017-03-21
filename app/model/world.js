@@ -56,22 +56,29 @@ var getWorld = null;
   var drawFrame = function(context) {
     context.save();
     
-    world.hero.drawFrame(context);
-    
     _.each(world.prey, function(morsel) {
-      // Move the morsels per their heading.
-      morsel.position.angle += 0.02 * Math.random() - 0.01;
-      morsel.position.x += .02 * Math.cos(morsel.position.angle);
-      morsel.position.y += .02 * Math.sin(morsel.position.angle);
-
-      toroidPosition(morsel.position);
-
       drawMorsel(context, morsel);
     });
     
+    world.toroidPosition(world.hero.position);
+    world.hero.drawFrame(context);
+
     context.restore();
   };
 
+
+  var tick = function(ticks) {
+    _.each(world.prey, function(morsel) {
+      // Move the morsels per their heading.
+      morsel.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
+      morsel.position.x += ticks * .02 * Math.cos(morsel.position.angle);
+      morsel.position.y += ticks * .02 * Math.sin(morsel.position.angle);
+
+      toroidPosition(morsel.position);
+    });
+    
+    world.hero.tick(ticks);
+  };
 
   var generatePrey = function(population) {
     world.prey = [];
@@ -106,7 +113,6 @@ var getWorld = null;
 
   var reset = function($global) {
     world.size = $global.displaysettings.viewportsize;
-    world.toroidPosition = toroidPosition;
 
     world.hero = getHero();
     world.hero.reset();
@@ -118,6 +124,9 @@ var getWorld = null;
 
   world.reset = reset;
   world.drawFrame = drawFrame;
+  world.tick = tick;
+  world.toroidPosition = toroidPosition;
+
   world.isInitialized = false;
   
   getWorld = function() {

@@ -174,7 +174,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     
     clearFrame(context);
     
-    if (!!$global.world) {
+    if (!!$global.world && !!$global.world.isInitialized) {
       $global.world.drawFrame(context);
     }
 
@@ -185,24 +185,28 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     context.restore();
   };
   
+  var FPS = 30;
+  
   var animate = function(context, element) {
     drawFrame(context, element);
 
-    var fps = 0;
-    if ($global.runstate === 'play') {
-      fps = 15;
-    } 
-    else if ($global.runstate === 'ff') {
-      fps = 100;
+    if ($global.world.isInitialized) {
+      if ($global.runstate === 'play') {
+        $global.world.tick(1);
+      } 
+      else if ($global.runstate === 'ff') {
+        $global.world.tick(5);
+      }
+      else if ($global.runstate === 'step') {
+        $global.world.tick(1);
+        $global.runstate = 'stop';
+      }
     }
 
-    if (!fps) {
-      return;
-    }
-    
+
     $timeout(function() {
       animate(context, element);
-    }, 1000 / fps);
+    }, 1000 / FPS);
   };
   
   var link = function(scope, element, attrs) {
@@ -215,9 +219,9 @@ cyberslugApp.directive('cyberslugGameCanvas', [
           (newValue !== 'stop' && oldValue === 'stop')) {
         $global.world.reset($global);
       }
-      
-      animate(context, element);
     });
+    
+    animate(context, element);
   };
   
   return {

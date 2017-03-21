@@ -14,7 +14,6 @@ var getHero = null;
   var hero = {};
   
   var drawFrame = function(context) {
-    wiggletick++;
     var gradient;
     
     if (!textureImg.loaded) {
@@ -104,8 +103,14 @@ var getHero = null;
     };
   };
 
+  var tick = function(ticks) {
+    wiggletick += ticks;
+  };
+  
+  
   hero.reset = reset;
   hero.drawFrame = drawFrame;
+  hero.tick = tick;
   
   getHero = function() {
     return hero;
