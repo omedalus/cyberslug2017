@@ -107,8 +107,6 @@ var getHero = null;
   hero.reset = reset;
   hero.drawFrame = drawFrame;
   
-  reset();
-  
   getHero = function() {
     return hero;
   };

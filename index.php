@@ -69,7 +69,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-number-interval="5"></div>
             <div class="dial"
                 data-cyberslug-dial="setupCtrl.$global.setup.population.faux"
-                data-label="'faux'"
+                data-label="'fauxflab'"
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"

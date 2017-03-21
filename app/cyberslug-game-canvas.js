@@ -193,7 +193,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
       fps = 15;
     } 
     else if ($global.runstate === 'ff') {
-      fps = 30;
+      fps = 100;
     }
 
     if (!fps) {
@@ -211,6 +211,11 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     scope.$global = $global;
     
     scope.$watch('$global.runstate', function(newValue, oldValue) {
+      if (!$global.world.isInitialized ||
+          (newValue !== 'stop' && oldValue === 'stop')) {
+        $global.world.reset($global);
+      }
+      
       animate(context, element);
     });
   };
