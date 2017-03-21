@@ -38,12 +38,13 @@ cyberslugApp.controller('SetupCtrl', [
 
 cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
   var link = function(scope, element, attrs) {
-    $(element).append('<div class="knob"></div>');
+    $(element).append('<div class="base"><div class="knob"></div></div>');
+    $(element).append('<label/>');
 
     var setKnobToCursorEvent = function(e) {
-      var parentOffset = element.parent().offset();       
-      var x = e.pageX - parentOffset.left - (element.width() / 2);
-      var y = e.pageY - parentOffset.top - (element.height() / 2);
+      var elemOffset = element.offset();       
+      var x = e.pageX - elemOffset.left - (element.width() / 2);
+      var y = e.pageY - elemOffset.top - (element.height() / 2);
 
       var angle = Math.atan2(y, x);
       
@@ -90,11 +91,11 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
       $('.dialtick', element).remove();
       
       for (var iTick = scope.min; iTick <= scope.max; iTick += scope.tickInterval) {
-        var tickelem = $('<div class="dialtick"></div>');
+        var tickelem = $('<div class="dialtick"><div class="tickmark">\u25cf</div></div>');
         tickelem.appendTo(element);
 
         if (!!scope.numberInterval && (iTick % scope.numberInterval) == 0) {
-          tickelem.text(iTick);
+          tickelem.html(iTick + '<div class="tickmark">\u25ae</div>');
         }
         
         var scalepos = 360 * (iTick - scope.min) / (scope.max - scope.min + 1);
@@ -107,6 +108,10 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
     scope.$watch('min', rebuildTicks);
     scope.$watch('max', rebuildTicks);
     scope.$watch('tickInterval', rebuildTicks);
+    
+    scope.$watch('label', function(newValue) {
+      $('label', element).text(newValue);
+    });
   };
   
   return {
@@ -115,7 +120,8 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
       max: '=',
       min: '=',
       tickInterval: '=',
-      numberInterval: '='
+      numberInterval: '=',
+      label: '='
     },
     link: link
   };
