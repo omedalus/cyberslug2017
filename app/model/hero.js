@@ -14,6 +14,39 @@ var getHero = null;
   
   var hero = {};
 
+  var getSensorPositions = function() {
+    // The antennae are 40 degrees from the body's lateral axis,
+    // about 7 units out.
+    // 40 degrees is about .7 radians.
+    return {
+      left: {
+        x: hero.position.x + 7 * Math.cos(hero.position.angle - .7),
+        y: hero.position.y + 7 * Math.sin(hero.position.angle - .7)
+      },
+      right: {
+        x: hero.position.x + 7 * Math.cos(hero.position.angle + .7),
+        y: hero.position.y + 7 * Math.sin(hero.position.angle + .7)
+      }
+    }
+  };
+
+  var drawSensorPositions = function(context) {
+    context.save();
+    
+    var sensorPositions = getSensorPositions();
+    _.each(sensorPositions, function(position, sensorname) {
+      context.save();
+      context.beginPath();
+      context.arc(position.x, position.y, 1, 0,Math.PI * 2);
+      context.fillStyle = '#ff0';
+      context.fill();
+      context.restore();
+    });
+
+    context.restore();
+  };
+
+
   var drawTravelHistory = function(context) {
     context.save();
     
@@ -32,6 +65,7 @@ var getHero = null;
       lastPoint = coords;
     });
     context.strokeStyle = 'rgba(128,100,30, .5)';
+    context.lineWidth = 1; // This is thicker than a pixel
     context.stroke();
     
     context.restore();
@@ -46,6 +80,7 @@ var getHero = null;
     }
     
     drawTravelHistory(context);
+    drawSensorPositions(context);
     
     context.save();
     
@@ -136,11 +171,21 @@ var getHero = null;
       angle: 0
     };
     hero.travelHistory = [];
+    
+    hero.sensors = {};
+    
+    hero.modelvars = {};
+  };
+
+  var processPhysiologicalModel = function() {
+    console.log(hero.sensors)
   };
 
   var tick = function(ticks) {
     wiggletick += ticks;
     
+    processPhysiologicalModel();
+
     hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
     hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
     hero.position.y += ticks * .1 * Math.sin(hero.position.angle);
@@ -148,10 +193,11 @@ var getHero = null;
     hero.travelHistory.push([hero.position.x, hero.position.y]);
   };
   
-  
   hero.reset = reset;
   hero.drawFrame = drawFrame;
   hero.tick = tick;
+  
+  hero.getSensorPositions = getSensorPositions;
   
   getHero = function() {
     return hero;

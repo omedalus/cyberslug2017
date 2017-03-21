@@ -93,6 +93,42 @@ var getWorld = null;
     context.restore();
   };
 
+  var getToroidDistance = function(x1, y1, x2, y2) {
+    var xdist = Math.abs(x2 - x1);
+    if (xdist > world.size / 2) {
+      xdist = world.size - xdist;
+    }
+    
+    var ydist = Math.abs(y2 - y1);
+    if (ydist > world.size / 2) {
+      ydist = world.size - ydist;
+    }
+    return Math.hypot(xdist, ydist);
+  };
+
+  var getOdorsAtPosition = function(x, y) {
+    var odors = {};
+    _.each(world.prey, function(morsel) {
+      var dist =
+          getToroidDistance(x, y, 
+              morsel.position.x, morsel.position.y);
+      
+      var morselOdors = speciesOdors[morsel.species];
+      if (!morselOdors) {
+        return;
+      }
+      _.each(morselOdors, function(intensity, odorname) {
+        // Diffusion follows inverse cube model.
+        intensity = intensity / (dist * dist * dist); 
+        if (!odors[odorname]) {
+          odors[odorname] = 0;
+        }
+        odors[odorname] += intensity;
+      });
+    });
+    return odors;
+  };
+
 
   var tick = function(ticks) {
     _.each(world.prey, function(morsel) {
@@ -103,7 +139,18 @@ var getWorld = null;
 
       toroidPosition(morsel.position);
     });
-    
+
+    // Set our hero's sensors.
+    var sensorPositions = world.hero.getSensorPositions();
+    _.each(sensorPositions, function(position, sensorname) {
+      var odorsAtPosition = getOdorsAtPosition(position.x, position.y);
+      world.hero.sensors[sensorname] = {};
+      _.each(odorsAtPosition, function(intensity, odorname) {
+        var sensorReading = Math.min(7, 7 + Math.log10(intensity));
+        world.hero.sensors[sensorname][odorname] = Math.max(sensorReading, 0);
+      });
+    });
+
     world.hero.tick(ticks);
   };
 
@@ -125,7 +172,6 @@ var getWorld = null;
             y: (Math.random() * world.size) - (world.size / 2)
           };
           var distFromHero = Math.hypot(
-              position.x - world.hero.position.x, 
               position.y - world.hero.position.y);
           if (distFromHero > 25) {
             // Morsel was generated far away enough. This is good.
@@ -137,6 +183,10 @@ var getWorld = null;
         world.prey.push(morsel);
       });
     });
+
+    world.prey = _.shuffle(world.prey);
+    // In theory we should shuffle the prey array every tick.
+    // In practice, this is only necessary if we're bad coders.
   };
 
 
