@@ -8,8 +8,8 @@
     
     setup: {
       population: {
-        hermissenda: 3,
-        flabellina: 10,
+        hermissenda: 1, //3
+        flabellina: 0, //10
         faux: 0
       }
     },

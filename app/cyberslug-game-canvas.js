@@ -195,7 +195,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
         $global.world.tick(1);
       } 
       else if ($global.runstate === 'ff') {
-        $global.world.tick(5);
+        $global.world.tick(10);
       }
       else if ($global.runstate === 'step') {
         $global.world.tick(1);

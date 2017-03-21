@@ -27,6 +27,12 @@ var getWorld = null;
     }
   };
   
+  var odorFillStyles = {
+    'odor_hermi': 'rgba(0,128,0,',
+    'odor_flab': 'rgba(128,0,0,',
+    //'odor_betaine': 'rgba(128,128,0,',
+  };
+  
   var world = {};
   
   var drawMorsel = function(context, morsel) {
@@ -34,6 +40,27 @@ var getWorld = null;
     
     context.translate(morsel.position.x, morsel.position.y);
     
+    // Draw the morsel's odors(s)
+    // Do it before drawing the morsel, so
+    // the morsel will lie on top of the odors.
+    _.each(speciesOdors[morsel.species], function(intensity, odorname) {
+      var orgb = odorFillStyles[odorname];
+      if (!orgb) {
+        return;
+      }
+      
+      var gradient = context.createRadialGradient(0,0, 0, 0,0, 20);
+      for (var i = 0; i < 4; i++) {
+        gradient.addColorStop(.2*i, 
+            orgb + 
+            (intensity / Math.pow(2, i)) + 
+            ')');
+      }
+      gradient.addColorStop(1, orgb + '0)');
+      context.fillStyle = gradient;
+      context.fillRect(-20,-20, 40,40);
+    });
+
     var fillStyle = speciesFillStyles[morsel.species];
     if (!!fillStyle) {
       context.beginPath();
@@ -97,8 +124,10 @@ var getWorld = null;
             x: (Math.random() * world.size) - (world.size / 2),
             y: (Math.random() * world.size) - (world.size / 2)
           };
-          if (Math.hypot(position.x, position.y, 
-              world.hero.position.x, world.hero.position.y) > 25) {
+          var distFromHero = Math.hypot(
+              position.x - world.hero.position.x, 
+              position.y - world.hero.position.y);
+          if (distFromHero > 25) {
             // Morsel was generated far away enough. This is good.
             morsel.position = position;
           }

@@ -1,4 +1,5 @@
 /* global Image */
+/* global _ */
 
 var getHero = null;
 
@@ -12,6 +13,30 @@ var getHero = null;
   };
   
   var hero = {};
+
+  var drawTravelHistory = function(context) {
+    context.save();
+    
+    context.beginPath();
+    context.moveTo(0,0);
+    var lastPoint = [0,0];
+    _.each(hero.travelHistory, function(coords) {
+      if (Math.hypot(coords[0]-lastPoint[0], coords[1]-lastPoint[1]) > 20) {
+        // Our hero only travels in short increments. He could not have
+        // jumped so many whole units.
+        // We must've gone around the toroid. Lift our pen.
+        context.moveTo(coords[0], coords[1]);
+      } else {
+        context.lineTo(coords[0], coords[1]);
+      }
+      lastPoint = coords;
+    });
+    context.strokeStyle = 'rgba(128,100,30, .5)';
+    context.stroke();
+    
+    context.restore();
+    // Everything restored again.
+  };
   
   var drawFrame = function(context) {
     var gradient;
@@ -20,7 +45,15 @@ var getHero = null;
       return;
     }
     
+    drawTravelHistory(context);
+    
     context.save();
+    
+    context.translate(hero.position.x, hero.position.y);
+    context.rotate(hero.position.angle);
+    
+    // We drew our hero pointing up, but angle 0 is to the right.
+    context.rotate(+Math.PI / 2);
     
     // We scale to match our texture image.
     // And also because our hero isn't exactly a circle.
@@ -93,6 +126,7 @@ var getHero = null;
     // Antennae end.
 
     context.restore();
+    // Everything restored.
   };
   
   var reset = function() {
@@ -101,10 +135,17 @@ var getHero = null;
       y: 0,
       angle: 0
     };
+    hero.travelHistory = [];
   };
 
   var tick = function(ticks) {
     wiggletick += ticks;
+    
+    hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
+    hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
+    hero.position.y += ticks * .1 * Math.sin(hero.position.angle);
+    
+    hero.travelHistory.push([hero.position.x, hero.position.y]);
   };
   
   
