@@ -42,12 +42,15 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
           <div id="rca-jacks"></div>
         
+        {{setupCtrl.$global.setup.population.hermissenda}}
           <div id="dialrow">
-            <button class="btn skeuo">Button</button>
-            <button class="btn skeuo">Button</button>
-            <button class="btn skeuo">Button</button>
-            <button class="btn skeuo">Button</button>
-            <button class="btn skeuo">Button</button>
+            <div class="dial"
+                data-cyberslug-dial="setupCtrl.$global.setup.population.hermissenda"
+                data-min="0"
+                data-max="15"
+                data-tick-interval="1"></div>
+            <div class="dial"></div>
+            <div class="dial"></div>
           </div> <!-- dialrow -->
         </div> <!-- oscilloscopepanel -->
       </div>

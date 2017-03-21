@@ -1,3 +1,11 @@
+html {
+  user-select: none;
+  cursor: default;
+}
+button, input {
+  outline: none !important;
+}
+
 body {
   background: url('img/green-neuron-background.jpg');
   background-attachment: fixed;
@@ -212,8 +220,38 @@ canvas {
   position: relative;
   top: -18px;
   right: -34px;
+  
+  display: none;
 }
 
 #dialrow {
   clear: both;
+}
+
+
+.dial {
+  background-image: url('img/control-dial-base.png');
+  background-position: center center;
+  background-size: 80px 80px;
+  background-repeat: no-repeat;
+  
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+.dial .knob {
+  content: 'aaa';
+  background-image: url('img/control-dial-knob.png');
+  background-position: center center;
+  background-size: 80px 80px;
+  background-repeat: no-repeat;
+
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
 }
