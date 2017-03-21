@@ -48,9 +48,20 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-cyberslug-dial="setupCtrl.$global.setup.population.hermissenda"
                 data-min="0"
                 data-max="15"
-                data-tick-interval="1"></div>
-            <div class="dial"></div>
-            <div class="dial"></div>
+                data-tick-interval="1"
+                data-number-interval="4"></div>
+            <div class="dial"
+                data-cyberslug-dial="setupCtrl.$global.setup.population.flabellina"
+                data-min="0"
+                data-max="15"
+                data-tick-interval="1"
+                data-number-interval="4"></div>
+            <div class="dial"
+                data-cyberslug-dial="setupCtrl.$global.setup.population.faux"
+                data-min="0"
+                data-max="15"
+                data-tick-interval="1"
+                data-number-interval="4"></div>
           </div> <!-- dialrow -->
         </div> <!-- oscilloscopepanel -->
       </div>

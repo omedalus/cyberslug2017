@@ -80,11 +80,33 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
         });
     
     scope.$watch('cyberslugDial', function(newValue, oldValue) {
-      var knobPosition = 360 * (newValue - scope.min) / (scope.max - scope.min + 1);
+      var scalepos = 360 * (newValue - scope.min) / (scope.max - scope.min + 1);
       $('.knob', element).css({
-        transform: 'rotate(' + knobPosition + 'deg)'
+        transform: 'rotate(' + scalepos + 'deg)'
       });
     });
+    
+    var rebuildTicks = function() {
+      $('.dialtick', element).remove();
+      
+      for (var iTick = scope.min; iTick <= scope.max; iTick += scope.tickInterval) {
+        var tickelem = $('<div class="dialtick"></div>');
+        tickelem.appendTo(element);
+
+        if (!!scope.numberInterval && (iTick % scope.numberInterval) == 0) {
+          tickelem.text(iTick);
+        }
+        
+        var scalepos = 360 * (iTick - scope.min) / (scope.max - scope.min + 1);
+        tickelem.css({
+          transform: 'rotate(' + scalepos + 'deg)'
+        });
+      }
+    };
+    
+    scope.$watch('min', rebuildTicks);
+    scope.$watch('max', rebuildTicks);
+    scope.$watch('tickInterval', rebuildTicks);
   };
   
   return {
@@ -93,7 +115,7 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
       max: '=',
       min: '=',
       tickInterval: '=',
-      sensitivity: '='
+      numberInterval: '='
     },
     link: link
   };
