@@ -31,6 +31,7 @@ canvas {
   padding: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
+  min-height: 316px;
   
   background-image: url('img/brushed-aluminum.jpg');
   background-repeat: repeat;
@@ -98,7 +99,7 @@ canvas {
 #canvasnameplate::before {
   content: '';
   height: 100%;
-  width: 2em;
+  width: 28px;
   position: absolute;
   top: 0;
   left: 10px;
@@ -112,7 +113,7 @@ canvas {
 #canvasnameplate::after {
   content: '';
   height: 100%;
-  width: 2em;
+  width: 28px;
   position: absolute;
   top: 0;
   right: 10px;
@@ -125,7 +126,11 @@ canvas {
 
 
 .skeuo.btn {
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  box-sizing: border-box;
+  border: none;
   height: 50px;
   width: 50px;
   position: relative;
@@ -139,7 +144,7 @@ canvas {
 }
 
 .skeuo.btn {
-  background-image: url('img/skeuo-btn-white.png');
+  background-image: url('img/skeuo-btn-blue.png');
   box-shadow:
       2px 5px 8px #111, 
       0px 0px 2px 2px rgba(0,0,0,.3);  
@@ -158,6 +163,7 @@ canvas {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  opacity: 0.6;
 }
 
 #btn-play::after {
@@ -186,4 +192,28 @@ canvas {
 }
 #btn-step.active::after {
   background-image: url('img/glyph-step-active.png');
+}
+
+#buttonrow {
+  white-space: nowrap;
+  float: left;
+  padding-bottom: 30px;
+}
+#rca-jacks {
+  content: '';
+  height: 90px;
+  width: 120px;
+  background-image: url(img/rca-jacks.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  
+  float: right;
+  position: relative;
+  top: -18px;
+  right: -34px;
+}
+
+#dialrow {
+  clear: both;
 }

@@ -29,14 +29,26 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
         </div>
       </div>
       <div class="col-md-4 col-sm-6">
-        <div class="oscilloscopepanel">
-          <div class="buttonrow">
-            <button class="btn skeuo" id="btn-stop"
-            /><button class="btn skeuo-main skeuo" id="btn-play"
-            /><button class="btn skeuo" id="btn-ff"
-            /><button class="btn skeuo" id="btn-step"
+        <div class="oscilloscopepanel" data-ng-controller="SetupCtrl as setupCtrl">
+          <div id="buttonrow">
+            <button 
+                data-ng-repeat="buttonid in ['stop', 'play', 'ff', 'step']"
+                id="btn-{{buttonid}}"
+                class="btn skeuo"
+                data-ng-class="{active: setupCtrl.$global.runstate == buttonid, 'skeuo-main': buttonid == 'play'}"
+                data-ng-click="setupCtrl.$global.runstate = buttonid"
             />
           </div> <!-- buttonrow -->
+
+          <div id="rca-jacks"></div>
+        
+          <div id="dialrow">
+            <button class="btn skeuo">Button</button>
+            <button class="btn skeuo">Button</button>
+            <button class="btn skeuo">Button</button>
+            <button class="btn skeuo">Button</button>
+            <button class="btn skeuo">Button</button>
+          </div> <!-- dialrow -->
         </div> <!-- oscilloscopepanel -->
       </div>
       <div class="col-md-4 col-sm-6">
