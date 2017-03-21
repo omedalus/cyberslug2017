@@ -66,7 +66,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     var d = $global.displaysettings.viewportsize / 2;
 
     var gradient=context.createLinearGradient(-d, -d, d, d);
-    gradient.addColorStop(0, '#245');
+    gradient.addColorStop(0, '#356');
     gradient.addColorStop(1, '#023');
     
     context.fillStyle = gradient;
@@ -79,37 +79,48 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     context.save();
     var d = $global.displaysettings.viewportsize / 2;
 
+    // Scale the context so all coordinates are in the range [-1, 1].
+    // Much more sensible than multiplying by d everywhere.
+    context.scale(d, d);
+
     // Top
-    var gradient=context.createLinearGradient(0, -d, 0, -0.8 * d);
+    var gradient = context.createLinearGradient(0, -1, 0, -0.8);
     gradient.addColorStop(0, 'rgba(0,0,0,.6)');
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     
     context.fillStyle = gradient;
-    context.fillRect(-d, -d, 2 * d, d/5);
+    context.fillRect(-1, -1, 2, .2);
 
     // Left    
-    gradient=context.createLinearGradient(-d, 0, -0.8 * d, 0);
+    gradient = context.createLinearGradient(-1, 0, -0.8, 0);
     gradient.addColorStop(0, 'rgba(0,0,0,.6)');
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     
     context.fillStyle = gradient;
-    context.fillRect(-d, -d, d/5, 2 * d);
+    context.fillRect(-1, -1, 0.2, 2);
     
     // Bottom
-    gradient=context.createLinearGradient(0, d, 0, 0.9 * d);
+    gradient = context.createLinearGradient(0, 1, 0, 0.9);
     gradient.addColorStop(0, 'rgba(0,0,0,.6)');
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     
     context.fillStyle = gradient;
-    context.fillRect(d, d, -2 * d, -d/10);
+    context.fillRect(1, 1, -2, -0.1);
 
     // Right    
-    gradient=context.createLinearGradient(d, 0, 0.8 * d, 0);
+    gradient = context.createLinearGradient(1, 0, 0.8, 0);
     gradient.addColorStop(0, 'rgba(0,0,0,.6)');
     gradient.addColorStop(1, 'rgba(0,0,0,0)');
     
     context.fillStyle = gradient;
-    context.fillRect(d, d, -d/5, -2 * d);
+    context.fillRect(1, 1, -.2, -2);
+    
+    // More bottom.
+    gradient = context.createRadialGradient(0,0, .8, 0,0, 1.4);
+    gradient.addColorStop(0, 'rgba(0,0,0,0)');
+    gradient.addColorStop(1, 'rgba(0,0,20,.6)');
+    context.fillStyle = gradient;
+    context.fillRect(-1, 0, 2, 1);
     
     context.restore();
   };
@@ -124,25 +135,34 @@ cyberslugApp.directive('cyberslugGameCanvas', [
 
     // Top Left
     context.beginPath();
-    context.moveTo(1, 0);
-    context.lineTo(.95, -0.68);
-    context.arcTo(.88, -.88, 0.68, -.88, 0.1);
-    context.lineTo(-0, -.88);
+    context.moveTo(-.88, -.68);
+    context.arcTo(-.88, -.88, -0.68, -.88, 0.1);
+    context.lineTo(-.68, -.88);
     
-    //context.arcTo(-1, -1, -1, -0.68, 0.1);
-    //context.lineTo(-1, 0);
-    
-
     //var gradient=context.createLinearGradient(0, -.88, -.05, -0.68);
-    var gradient=context.createRadialGradient(-.1,.1, 1.5, 0,.3, 1.15);
+    var gradient=context.createRadialGradient(-.68,-.68, 0, -.68,-.68, .3);
     gradient.addColorStop(0, 'rgba(255,255,255,0)');
-    gradient.addColorStop(.5, 'rgba(100,200,255,0)');
-    gradient.addColorStop(.8, 'rgba(200,240,255,.2)');
-    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    gradient.addColorStop(.6, 'rgba(200,240,255,0)');
+    gradient.addColorStop(1, 'rgba(240,240,255,.4)');
     
     context.fillStyle = gradient;
     context.fill();
+
+    // Top Right
+    context.beginPath();
+    context.moveTo(-.68, -.88);
+    context.lineTo(.68, -.88);
+    context.arcTo(.88,-.88, 0.88,.68, 0.1);
+    context.lineTo(.88, .5);    
     
+    gradient = context.createLinearGradient(.01,-.88, 0,-.8);
+    gradient.addColorStop(0, 'rgba(240,240,255,.2)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+
+    context.fillStyle = gradient;
+    context.fill();
+    
+
     context.restore();
   };  
   
