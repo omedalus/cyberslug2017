@@ -61,8 +61,8 @@
   
   var stopAudio = function(audioid) {
     var audioElem = getAudio(audioid);
+    audioElem.pause();
     audioElem.currentTime = 0;
-    audioElem.stop();
   };
   
   global.prefetch.getAudio = getAudio;

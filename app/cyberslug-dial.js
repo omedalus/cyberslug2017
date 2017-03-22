@@ -38,8 +38,16 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
 
         // It's been more than 200 ms. Permit the audio to be played.
         var oldscalepos = (scope.cyberslugDial - scope.min) / (scope.max - scope.min);
-        var numClicksSounds = Math.round(10 * Math.abs(scalepos - oldscalepos));
+        var numClicksSounds = Math.round(10 * Math.abs(scalepos - oldscalepos)) + 1;
+        // Each click is fifty milliseconds.
+        var stopSoundInMs = 50 * numClicksSounds;
+        
         $global.prefetch.playAudio('audio-dialtick');
+        if (stopSoundInMs < 200) {
+          setTimeout(function() {
+            $global.prefetch.stopAudio('audio-dialtick');
+          }, stopSoundInMs);
+        }
       }
 
       scope.cyberslugDial = newvalue;
