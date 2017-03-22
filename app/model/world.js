@@ -1,5 +1,4 @@
 /* global getHero */
-/* global createPrey */
 /* global _ */
 
 var getWorld = null;
@@ -30,7 +29,7 @@ var getWorld = null;
   var odorFillStyles = {
     'odor_hermi': 'rgba(0,128,0,',
     'odor_flab': 'rgba(128,0,0,',
-    //'odor_betaine': 'rgba(128,128,0,',
+    'odor_betaine': 'rgba(128,128,128,'
   };
   
   var world = {};
@@ -44,6 +43,10 @@ var getWorld = null;
     // Do it before drawing the morsel, so
     // the morsel will lie on top of the odors.
     _.each(speciesOdors[morsel.species], function(intensity, odorname) {
+      if (!displaysettings.showodors[odorname]) {
+        return;
+      }
+    
       var orgb = odorFillStyles[odorname];
       if (!orgb) {
         return;

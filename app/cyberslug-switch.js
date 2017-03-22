@@ -33,6 +33,7 @@ cyberslugApp.directive('cyberslugSwitch', ['$global', function($global) {
     
     $(element).click(function() {
       scope.cyberslugSwitch = !scope.cyberslugSwitch;
+      $global.prefetch.playAudio('audio-switch');
     });
   };
   

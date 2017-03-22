@@ -15,6 +15,11 @@ cyberslugApp.controller('SetupCtrl', [
   $scope.$watch('$global.world.hero', function(newValue) {
     setupCtrl.hero = newValue;
   });
+  
+  $scope.onSkeuoButton = function(buttonid) {
+    setupCtrl.$global.runstate = buttonid;
+    $global.prefetch.playAudio('audio-button');
+  };
 }]);
 
 cyberslugApp.controller('ReadoutCtrl', [

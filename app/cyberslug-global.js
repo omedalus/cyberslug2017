@@ -26,7 +26,7 @@
         minor: 1
       },
       
-      showtrail: false,
+      showtrail: 0,
       showodors: {
         odor_hermi: true,
         odor_flab: true,
@@ -36,6 +36,21 @@
     
     world: getWorld()
   };
+
+  var playAudio = function(audioid) {
+    var jqAudioElem = global.prefetch.resources[audioid];
+    if (!jqAudioElem || jqAudioElem.length == 0) {
+      return false;
+    }
+    var audioElem = jqAudioElem[0];
+    if (!audioElem) {
+      return false;
+    }
+    audioElem.currentTime = 0;
+    audioElem.play();
+    return true;
+  };
+  global.prefetch.playAudio = playAudio;
 
   cyberslugApp.factory('$global', [function() {
     return global;

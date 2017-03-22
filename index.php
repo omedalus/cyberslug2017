@@ -56,6 +56,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src='img/red-light-on.png'></img>
       <img src='img/switch-down.png'></img>
       <img src='img/switch-up.png'></img>
+      
+      <audio id="audio-switch" src="audio/switch.mp3"></audio>
+      <audio id="audio-button" src="audio/button.mp3"></audio>
     </div>
     
     <div id="prefetch-placeholder" style="display:none">
@@ -86,7 +89,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 id="btn-{{buttonid}}"
                 class="btn skeuo"
                 data-ng-class="{active: setupCtrl.$global.runstate == buttonid, 'skeuo-main': buttonid == 'play'}"
-                data-ng-click="setupCtrl.$global.runstate = buttonid"
+                data-ng-click="onSkeuoButton(buttonid)"
             />
           </div> <!-- buttonrow -->
 
@@ -113,10 +116,24 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-number-interval="5"></div>
           </div> <!-- dialrow -->
           
-          <div id="switchesrow" class="instrumentrow">
-            <div data-cyberslug-switch="setupCtrl.$global.displaysettings.showtrail"
-                data-label="'trail'">
-            </div>
+          <div id="displaycontrolsrow" class="instrumentrow">
+            <div data-cyberslug-dial="setupCtrl.$global.displaysettings.showtrail"
+                data-label="'trail'"
+                data-min="0"
+                data-max="1500"
+                data-tick-interval="100"
+                data-number-interval="300"></div>          
+            <div data-cyberslug-switch="setupCtrl.$global.displaysettings.showodors.odor_hermi"
+                data-label="'hermi'"
+                ></div>
+            <div data-cyberslug-switch="setupCtrl.$global.displaysettings.showodors.odor_flab"
+                data-label="'flab'"
+                ></div>
+            <div data-cyberslug-switch="setupCtrl.$global.displaysettings.showodors.odor_betaine"
+                data-label="'\u03B2ine'"
+                ></div>
+            
+
           </div> <!-- switchesrow -->
           
           

@@ -47,14 +47,33 @@ var getHero = null;
   };
 
 
-  var drawTravelHistory = function(context) {
+  var drawTravelHistory = function(context, traillength) {
+    if (!traillength) {
+      return;
+    }
+
     context.save();
     
     context.beginPath();
-    context.moveTo(0,0);
-    var lastPoint = [0,0];
-    _.each(hero.travelHistory, function(coords) {
-      if (Math.hypot(coords[0]-lastPoint[0], coords[1]-lastPoint[1]) > 20) {
+    var lastPoint = null;
+    
+    // Keep track of how many turns' worth of trail we've logged.
+    var traillengthShown = 0;
+    
+    for (var i = hero.travelHistory.length - 1; i >= 0; i--) {
+      var coords = hero.travelHistory[i];
+      traillengthShown += 0 + coords[2];
+      if (traillengthShown > traillength) {
+        break;
+      }
+      
+      if (!coords[0] && !coords[1]) {
+        // This point wasn't recorded correctly.
+        continue;
+      }
+      
+      if (!lastPoint ||
+          Math.hypot(coords[0]-lastPoint[0], coords[1]-lastPoint[1]) > 20) {
         // Our hero only travels in short increments. He could not have
         // jumped so many whole units.
         // We must've gone around the toroid. Lift our pen.
@@ -63,7 +82,7 @@ var getHero = null;
         context.lineTo(coords[0], coords[1]);
       }
       lastPoint = coords;
-    });
+    };
     context.strokeStyle = 'rgba(128,100,30, .5)';
     context.lineWidth = 1; // This is thicker than a pixel
     context.stroke();
@@ -83,12 +102,8 @@ var getHero = null;
       return;
     }
     
-    if (!!displaysettings.showtrail) {
-      drawTravelHistory(context);
-    } else {
-      hero.travelHistory = [];
-    }
-    
+    drawTravelHistory(context, displaysettings.showtrail);
+
     //drawSensorPositions(context);
     
     context.save();
@@ -316,8 +331,9 @@ var getHero = null;
       hero.position.y += ticks * .1 * Math.sin(hero.position.angle);
     }
     
-    hero.travelHistory.push([hero.position.x, hero.position.y]);
-    if (hero.travelHistory.length > 200) {
+    hero.travelHistory.push([hero.position.x, hero.position.y, ticks]);
+    if (hero.travelHistory.length > 5000) {
+      // That's way too much history to record! Start trimming.
       hero.travelHistory.shift();
     }
   };

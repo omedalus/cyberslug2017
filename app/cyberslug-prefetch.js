@@ -45,16 +45,19 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
         updateVisibility();
       };
       
-      jqPrefetchResource.
-          on('load', unpend).
-          on('error', unpend);
-      
-      jqPrefetchResource.on('load', function() {
+      var unpendError = unpend;
+      var unpendSuccess = function() {
+        unpend();
         if (!!prefetchResource.id) {
           $global.prefetch.resources[prefetchResource.id] = $(prefetchResource);
           scope.$apply();
-        }
-      });
+        }        
+      };
+      
+      jqPrefetchResource.
+          on('error', unpendError).
+          on('load', unpendSuccess).
+          on('canplaythrough', unpendSuccess);
     });
     
     scope.$watch('placeholder', function(newValue, oldValue) {
