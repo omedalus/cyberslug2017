@@ -73,6 +73,10 @@ var getHero = null;
   };
   
   var drawFrame = function(context) {
+    if (hero.isBeingPickedUp) {
+      wiggletick += 5;
+    }
+    
     var gradient;
     
     if (!textureImg.loaded) {
@@ -99,6 +103,11 @@ var getHero = null;
         1 + Math.cos(wiggletick / 10) * .02,
         1 - Math.cos((wiggletick + 5) / 10) * .02
     );
+    
+    // Make him buck when he's being picked up.
+    if (hero.isBeingPickedUp) {
+      context.transform(1, .05 * Math.sin(wiggletick + 1), .1 * Math.cos(wiggletick), 1, 0, 0);
+    }
     
     // Proboscis begin.
     context.save();
@@ -157,12 +166,17 @@ var getHero = null;
     // Antennae begin!
     context.save();
     
+    var antennamotion = 5;
+    if (hero.isBeingPickedUp) {
+      antennamotion = 15;
+    }
+    
     context.beginPath();
     context.moveTo(30, -40);
-    context.lineTo(70 + 5 * Math.cos(wiggletick / 7), -70);
+    context.lineTo(70 + antennamotion * Math.cos(wiggletick / 7), -70);
     context.lineTo(40, -20);
     context.moveTo(-30, -40);
-    context.lineTo(-70 + 5 * Math.cos(wiggletick / 13), -70);
+    context.lineTo(-70 + antennamotion * Math.cos(wiggletick / 13), -70);
     context.lineTo(-40, -20);
     context.closePath();
     
@@ -286,9 +300,12 @@ var getHero = null;
     processPhysiologicalModel(ticks);
     maybeExtendProboscis(ticks);
 
-    hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
-    hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
-    hero.position.y += ticks * .1 * Math.sin(hero.position.angle);
+    if (!hero.isBeingPickedUp) {
+      // Move our dude, but only if he isn't being manhandled.  
+      hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
+      hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
+      hero.position.y += ticks * .1 * Math.sin(hero.position.angle);
+    }
     
     hero.travelHistory.push([hero.position.x, hero.position.y]);
   };

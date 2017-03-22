@@ -240,8 +240,10 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     var isMouseDown = false;
     
     $(element).mouseout(function(e) {
+      $global.world.hero.isBeingPickedUp = false;
       isMouseDown = false;
     }).mouseup(function(e) {
+      $global.world.hero.isBeingPickedUp = false;
       isMouseDown = false;
     }).mousedown(function(e) {
       isMouseDown = true;
@@ -256,6 +258,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
       if (distToHero < 10) {
         if (isMouseDown) {
           $(element).addClass('mousegrabbinghero');
+          $global.world.hero.isBeingPickedUp = true;
           
           $global.world.hero.position.x = worldMousePosition.x;
           $global.world.hero.position.y = worldMousePosition.y;
@@ -263,6 +266,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
           
         } else {
           $(element).addClass('mouseoverhero');
+          $global.world.hero.isBeingPickedUp = false;
         }
       }
     });
