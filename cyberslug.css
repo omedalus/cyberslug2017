@@ -351,6 +351,7 @@ label {
       1px 2px rgba(100,100,100,.2), 
       1px 4px 2px 2px rgba(100,100,100,.5) inset, 
       -1px 2px 2px 2px rgba(250,250,250,1) inset;
+  transition: background-color .5s linear;
 }
 
 .gaugetick {
@@ -388,9 +389,17 @@ label {
 }
 
 @keyframes flash-red-background {
-  from {background-color: #ccc;}
+  from {background-color: #c66;}
   to {background-color: #f88;}
 }
 .gauge.gaugedanger .readout {
   animation: flash-red-background .25s alternate infinite;
+  box-shadow: 0 0 5px 2px #844; 
 }
+.gauge.gaugewarning .readout {
+  background-color: #cc0;
+}
+.gauge.gaugegreat .readout {
+  background-color: #0a0;
+}
+

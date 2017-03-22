@@ -14,8 +14,6 @@ cyberslugApp.directive('cyberslugGauge', ['$global', function($global) {
       $('.needle', element).css({
         left: (newValue * 100) + '%'
       });
-      
-      console.log(scope.readoutDanger)
     });
     
     scope.$watch('label', function(newValue) {
@@ -46,6 +44,8 @@ cyberslugApp.directive('cyberslugGauge', ['$global', function($global) {
         }
         
         var scalepos = (iTick - scope.min) / (scope.max - scope.min);
+        scalepos = Math.max(scalepos, 0);
+        scalepos = Math.min(scalepos, 1);
         tickelem.css({
           left: (scalepos * 100) + '%'
         });

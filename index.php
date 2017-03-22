@@ -92,7 +92,19 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-readout-warning="readoutCtrl.$global.world.hero.modelvars.nutrition < 0.4"
                 data-readout-great="readoutCtrl.$global.world.hero.modelvars.nutrition > 0.7"
             ></div>
-            </div>
+            <div class="gauge"
+                data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.satiation"
+                data-label="'Satiation'"
+                data-min="0"
+                data-max=".5"
+                data-tick-interval=".05"
+                data-number-interval=".1"
+                data-readout-danger="readoutCtrl.$global.world.hero.modelvars.satiation < 0.1"
+                data-readout-warning="readoutCtrl.$global.world.hero.modelvars.satiation < 0.2"
+                data-readout-great="readoutCtrl.$global.world.hero.modelvars.satiation > 0.4"
+            ></div>
+            
+          </div>
         </div>
       </div>
 
