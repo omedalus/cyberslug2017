@@ -249,6 +249,13 @@ canvas {
   background-image: url('img/glyph-step-active.png');
 }
 
+#btn-pause::after {
+  background-image: url('img/glyph-pause.png');
+}
+#btn-pause.active::after {
+  background-image: url('img/glyph-pause-active.png');
+}
+
 #buttonrow {
   white-space: nowrap;
   padding: 20px;

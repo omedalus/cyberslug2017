@@ -3,6 +3,7 @@
 
 cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
   var lastTimeAudioPlayed = new Date().getTime();
+  var scaleposWhenLastAudioPlayed = 0;
   
   var link = function(scope, element, attrs) {
     $(element).addClass('dial');
@@ -34,11 +35,8 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
       // Determine how many clicks to make! :-)
       var timeNow = new Date().getTime();
       if (lastTimeAudioPlayed + 200 < timeNow) {
-        lastTimeAudioPlayed = timeNow;
-
         // It's been more than 200 ms. Permit the audio to be played.
-        var oldscalepos = (scope.cyberslugDial - scope.min) / (scope.max - scope.min);
-        var numClicksSounds = Math.round(10 * Math.abs(scalepos - oldscalepos)) + 1;
+        var numClicksSounds = Math.round(10 * Math.abs(scalepos - scaleposWhenLastAudioPlayed)) + 1;
         // Each click is fifty milliseconds.
         var stopSoundInMs = 50 * numClicksSounds;
         
@@ -48,6 +46,9 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
             $global.prefetch.stopAudio('audio-dialtick');
           }, stopSoundInMs);
         }
+        
+        lastTimeAudioPlayed = timeNow;
+        scaleposWhenLastAudioPlayed = scalepos;
       }
 
       scope.cyberslugDial = newvalue;

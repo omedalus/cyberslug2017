@@ -199,7 +199,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
       }
       else if ($global.runstate === 'step') {
         $global.world.tick(1);
-        $global.runstate = 'stop';
+        $global.runstate = 'pause';
       }
     }
 

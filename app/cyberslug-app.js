@@ -17,6 +17,11 @@ cyberslugApp.controller('SetupCtrl', [
   });
   
   $scope.onSkeuoButton = function(buttonid) {
+    if (setupCtrl.$global.runstate === buttonid) {
+      // Same state. Change nothing.
+      // Don't even play the audio.
+      return;
+    }
     setupCtrl.$global.runstate = buttonid;
     $global.prefetch.playAudio('audio-button');
   };

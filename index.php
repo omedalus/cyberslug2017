@@ -48,6 +48,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src='img/glyph-ff-active.png'></img>
       <img src='img/glyph-step.png'></img>
       <img src='img/glyph-step-active.png'></img>
+      <img src='img/glyph-pause.png'></img>
+      <img src='img/glyph-pause-active.png'></img>
       <img src='img/rca-jacks.png'></img>
       <img src='img/control-dial-base.png'></img>
       <img src='img/control-dial-knob.png'></img>
@@ -86,7 +88,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
         <div class="oscilloscopepanel" data-ng-controller="SetupCtrl as setupCtrl">
           <div id="buttonrow" class="instrumentrow">
             <button 
-                data-ng-repeat="buttonid in ['stop', 'play', 'ff', 'step']"
+                data-ng-repeat="buttonid in ['stop', 'play', 'ff', 'step', 'pause']"
                 id="btn-{{buttonid}}"
                 class="btn skeuo"
                 data-ng-class="{active: setupCtrl.$global.runstate == buttonid, 'skeuo-main': buttonid == 'play'}"
