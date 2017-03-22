@@ -12,5 +12,12 @@ cyberslugApp.controller('SetupCtrl', [
   setupCtrl.$global = $global;
 }]);
 
+cyberslugApp.controller('ReadoutCtrl', [
+    '$scope', '$global', function($scope, $global) 
+{
+  var readoutCtrl = this;
+  readoutCtrl.$global = $global;
+}]);
+
 
 

@@ -17,6 +17,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <script src="app/cyberslug-app.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-global.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-dial.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-gauge.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-game-canvas.js?nocache=<?php echo time(); ?>"></script>
 
     <title>Cyberslug 2017</title>
@@ -78,8 +79,20 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
         </div> <!-- oscilloscopepanel -->
       </div>
       <div class="col-md-4 col-sm-6 col-lg-6">
-        <div class="oscilloscopepanel">
-          <button class="btn skeuo">Button</button>
+        <div class="oscilloscopepanel" data-ng-controller="ReadoutCtrl as readoutCtrl">
+          <div class="gaugesrow">
+            <div class="gauge"
+                data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.nutrition"
+                data-label="'Nutrition'"
+                data-min="0"
+                data-max="1"
+                data-tick-interval=".1"
+                data-number-interval=".2"
+                data-readout-danger="readoutCtrl.$global.world.hero.modelvars.nutrition < 0.2"
+                data-readout-warning="readoutCtrl.$global.world.hero.modelvars.nutrition < 0.4"
+                data-readout-great="readoutCtrl.$global.world.hero.modelvars.nutrition > 0.7"
+            ></div>
+            </div>
         </div>
       </div>
 

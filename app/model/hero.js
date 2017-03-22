@@ -79,8 +79,8 @@ var getHero = null;
       return;
     }
     
-    drawTravelHistory(context);
-    drawSensorPositions(context);
+    //drawTravelHistory(context);
+    //drawSensorPositions(context);
     
     context.save();
     
@@ -194,7 +194,7 @@ var getHero = null;
   var processPhysiologicalModel = function(ticks) {
     hero.modelvars.nutrition *= Math.pow(0.9995, ticks);
     hero.modelvars.satiation = 1 /
-        Math.po2((1 + 0.7 * Math.exp(-4 * hero.modelvars.nutrition + 2)), 2);
+        Math.pow((1 + 0.7 * Math.exp(-4 * hero.modelvars.nutrition + 2)), 2);
 
     var knownOdors = ['odor_hermi', 'odor_flab', 'odor_betaine'];
     hero.modelvars.odorMeans = _.map(knownOdors, function(odorname) {
