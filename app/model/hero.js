@@ -100,13 +100,28 @@ var getHero = null;
         1 - Math.cos((wiggletick + 5) / 10) * .02
     );
     
-    // Oral front begin.
+    // Proboscis begin.
+    context.save();
+    
+    context.beginPath();
+    context.moveTo(-8,0);
+    context.lineTo(-8, -50 - hero.proboscisExtension / 2);
+    context.lineTo(8, -50 - hero.proboscisExtension / 2);
+    context.lineTo(8, 0);
+    context.closePath();
+    context.fillStyle = '#a82';
+    context.fill();
+    
+    context.restore();
+    // Proboscis end.
+    
+    // Oral frond begin.
     context.save();
     
     context.beginPath();
     context.moveTo(-25,-25);
-    context.lineTo(-40,-60);
-    context.lineTo(40,-60);
+    context.lineTo(-40,-60 + hero.proboscisExtension / 2);
+    context.lineTo(40,-60 + hero.proboscisExtension / 2);
     context.lineTo(25,-25);
     context.clip();
     context.drawImage(textureImg, -40, -60);
@@ -118,7 +133,7 @@ var getHero = null;
     context.fillStyle = gradient;
     context.fillRect(-40,-60, 80,35);
     context.restore();
-    // Oral front end.    
+    // Oral frond end.    
     
     // Mottled body begin.
     context.save();
@@ -173,6 +188,8 @@ var getHero = null;
     hero.travelHistory = [];
     
     hero.sensors = {};
+    
+    hero.proboscisExtension = 0;
     
     hero.modelvars = {
       nutrition: 0.5,
@@ -249,10 +266,26 @@ var getHero = null;
     hero.position.angle += (turnAngle / 10);
   };
 
+  var maybeExtendProboscis = function(ticks) {
+    var isSmellingBetaine = 
+      hero.sensors.left.odor_betaine > 4 ||
+      hero.sensors.right.odor_betaine > 4;
+      
+    if (isSmellingBetaine) {
+      hero.proboscisExtension += ticks/5;
+    } else {
+      hero.proboscisExtension -= ticks/2;
+    }
+    hero.proboscisExtension = Math.min(hero.proboscisExtension, 20);
+    hero.proboscisExtension = Math.max(hero.proboscisExtension, 0);
+    console.log(hero.proboscisExtension)
+  };
+
   var tick = function(ticks) {
     wiggletick += ticks;
     
     processPhysiologicalModel(ticks);
+    maybeExtendProboscis(ticks);
 
     hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
     hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
