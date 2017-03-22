@@ -140,7 +140,7 @@ var getWorld = null;
       var dist = getToroidDistance(
           morsel.position.x, morsel.position.y, 
           proboscisPosition.x, proboscisPosition.y);
-      if (dist < 4) {
+      if (dist < 3) {
         eaten.push(morsel);
       }
     });
