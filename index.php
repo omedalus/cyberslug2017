@@ -20,11 +20,18 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <script src="app/cyberslug-gauge.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-switch.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-game-canvas.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-prefetch.js?nocache=<?php echo time(); ?>"></script>
 
     <title>Cyberslug 2017</title>
   </head>
 
   <body>
+    <div data-cyberslug-prefetch="" style="display:none">
+      <img id='switch-up' src="img/switch-up.png" />
+      <img id='switch-down' src="img/switch-down.png" />
+      <img id='switch-down' src="img/switch-dowsdsadfsadfsadn.png" />
+    </div>
+    
     <div class="container-fluid" id="gamesurface">
       <div class="col-md-8 col-lg-6 oscilloscopepanel" id="canvasholder">
         <canvas 

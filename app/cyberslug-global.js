@@ -6,6 +6,11 @@
   var global = {
     runstate: 'play',
     
+    prefetch: {
+      ready: false,
+      resources: {}
+    },
+    
     setup: {
       population: {
         hermissenda: 4,
