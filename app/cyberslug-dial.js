@@ -2,6 +2,8 @@
 /* global cyberslugApp */
 
 cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
+  var lastTimeAudioPlayed = new Date().getTime();
+  
   var link = function(scope, element, attrs) {
     $(element).addClass('dial');
     $(element).append('<div class="base"><div class="knob"></div></div>');
@@ -29,6 +31,17 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
       var newvalue = (scope.max - scope.min) * scalepos + scope.min;
       newvalue = parseInt(newvalue, 10);
       
+      // Determine how many clicks to make! :-)
+      var timeNow = new Date().getTime();
+      if (lastTimeAudioPlayed + 200 < timeNow) {
+        lastTimeAudioPlayed = timeNow;
+
+        // It's been more than 200 ms. Permit the audio to be played.
+        var oldscalepos = (scope.cyberslugDial - scope.min) / (scope.max - scope.min);
+        var numClicksSounds = Math.round(10 * Math.abs(scalepos - oldscalepos));
+        $global.prefetch.playAudio('audio-dialtick');
+      }
+
       scope.cyberslugDial = newvalue;
       scope.$apply();
     };

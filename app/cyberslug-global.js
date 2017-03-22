@@ -37,20 +37,37 @@
     world: getWorld()
   };
 
-  var playAudio = function(audioid) {
+  // Returns a usable audio element, even if it's a dummy.
+  var getAudio = function(audioid) {
+    var dummy = new Audio();
+    
     var jqAudioElem = global.prefetch.resources[audioid];
     if (!jqAudioElem || jqAudioElem.length == 0) {
-      return false;
+      return dummy;
     }
     var audioElem = jqAudioElem[0];
     if (!audioElem) {
-      return false;
+      return dummy;
     }
+    
+    return audioElem;
+  };
+
+  var playAudio = function(audioid) {
+    var audioElem = getAudio(audioid);
     audioElem.currentTime = 0;
     audioElem.play();
-    return true;
   };
+  
+  var stopAudio = function(audioid) {
+    var audioElem = getAudio(audioid);
+    audioElem.currentTime = 0;
+    audioElem.stop();
+  };
+  
+  global.prefetch.getAudio = getAudio;
   global.prefetch.playAudio = playAudio;
+  global.prefetch.stopAudio = stopAudio;
 
   cyberslugApp.factory('$global', [function() {
     return global;

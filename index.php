@@ -59,6 +59,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       
       <audio id="audio-switch" src="audio/switch.mp3"></audio>
       <audio id="audio-button" src="audio/button.mp3"></audio>
+      <audio id="audio-dialtick" src="audio/dialtick.wav"></audio>
     </div>
     
     <div id="prefetch-placeholder" style="display:none">
