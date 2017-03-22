@@ -19,6 +19,18 @@ body {
 }
 
 
+#prefetch-placeholder {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 30%;
+  color: #484;
+  text-shadow: 0 0 2px #0f0;
+  font-family: monospace;
+}
+
+
 canvas {
 }
 

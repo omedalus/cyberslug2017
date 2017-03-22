@@ -26,7 +26,11 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
   </head>
 
   <body>
-    <div data-cyberslug-prefetch="'#gamesurface'" style="display:none">
+    <div 
+        data-cyberslug-prefetch="'#gamesurface'" 
+        data-placeholder="'#prefetch-placeholder'"
+        style="display:none"
+    >
       <img src='img/green-neuron-background.jpg'></img>
       <img src='img/cyberslug.png'></img>
       <img src='img/black-foam-texture.jpg'></img>
@@ -52,6 +56,11 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src='img/red-light-on.png'></img>
       <img src='img/switch-down.png'></img>
       <img src='img/switch-up.png'></img>
+    </div>
+    
+    <div id="prefetch-placeholder" style="display:none">
+      <h1>Loading...</h1>
+      <progress></progress>
     </div>
     
     <div class="container-fluid" id="gamesurface" style="display:none">
