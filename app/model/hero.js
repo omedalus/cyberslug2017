@@ -74,7 +74,7 @@ var getHero = null;
   
   var drawFrame = function(context) {
     if (hero.isBeingPickedUp) {
-      wiggletick += 5;
+      wiggletick += 3;
     }
     
     var gradient;
@@ -106,7 +106,7 @@ var getHero = null;
     
     // Make him buck when he's being picked up.
     if (hero.isBeingPickedUp) {
-      context.transform(1, .05 * Math.sin(wiggletick + 1), .1 * Math.cos(wiggletick), 1, 0, 0);
+      context.transform(1, .05 * Math.sin(wiggletick/10 + 1), .1 * Math.cos(wiggletick/10), 1, 0, 0);
     }
     
     // Proboscis begin.
@@ -295,7 +295,11 @@ var getHero = null;
   };
 
   var tick = function(ticks) {
-    wiggletick += ticks;
+    if (!hero.isBeingPickedUp) {
+      // If he's being picked up, the wiggletick counter 
+      // is handled in the drawFrame method.
+      wiggletick += ticks;
+    }
     
     processPhysiologicalModel(ticks);
     maybeExtendProboscis(ticks);

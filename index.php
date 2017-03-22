@@ -41,7 +41,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       </div>
       <div class="col-md-4 col-sm-6 col-lg-6">
         <div class="oscilloscopepanel" data-ng-controller="SetupCtrl as setupCtrl">
-          <div id="buttonrow">
+          <div id="buttonrow" class="instrumentrow">
             <button 
                 data-ng-repeat="buttonid in ['stop', 'play', 'ff', 'step']"
                 id="btn-{{buttonid}}"
@@ -53,7 +53,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
           <div id="rca-jacks"></div>
         
-          <div id="dialrow">
+          <div id="dialrow" class="instrumentrow">
             <div class="dial"
                 data-cyberslug-dial="setupCtrl.$global.setup.population.hermissenda"
                 data-label="'hermissenda'"
@@ -80,7 +80,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       </div>
       <div class="col-md-4 col-sm-6 col-lg-6">
         <div class="oscilloscopepanel" data-ng-controller="ReadoutCtrl as readoutCtrl">
-          <div class="gaugesrow">
+          <div id="gaugesrow" class="instrumentrow">
             <div class="gauge"
                 data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.nutrition"
                 data-label="'Nutrition'"
@@ -120,7 +120,16 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-number-interval=".5"
             ></div>
             
-          </div>
+          </div> <!-- gauges row -->
+          
+          <div id="lampsrow" class="instrumentrow">
+            <div class="lamp"
+                data-ng-class="{lampon: readoutCtrl.$global.world.hero.modelvars.appetiteSwitch < 0}"
+            >
+              <label>HUNGRY</label>
+            </div>
+            
+          </div> <!-- lamps row -->
         </div>
       </div>
 

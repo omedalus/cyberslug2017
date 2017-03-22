@@ -144,6 +144,11 @@ canvas {
 }
 
 
+.instrumentrow {
+  text-align: center;
+}
+
+
 .skeuo.btn {
   background-size: cover;
   background-repeat: no-repeat;
@@ -215,7 +220,6 @@ canvas {
 
 #buttonrow {
   white-space: nowrap;
-  float: left;
   padding: 20px;
   padding-top: 0;
 }
@@ -248,6 +252,8 @@ canvas {
   height: 70px;
   position: relative;
   margin-bottom: 20px;
+  
+  cursor: pointer;
 }
 .dial .base {
   background-image: url('img/control-dial-base.png');
@@ -287,6 +293,8 @@ canvas {
   height: 100%;
   text-align: center;
   padding-top: 0px;
+  left: 0;
+  top: 0;
   
   font-family: monospace;
   font-weight: bold;
@@ -308,6 +316,7 @@ label {
   width: 100%;
   text-align: center;
   bottom: -22px;
+  left: 0;
   font-family: monospace;
   font-weight: normal;
   background-color: #06a;
@@ -326,7 +335,7 @@ label {
 }
 
 
-.gaugesrow {
+#gaugesrow {
   padding: 0 20px;
 }
 
@@ -342,6 +351,7 @@ label {
       0 0 10px 2px rgba(255,255,200,.2) inset, 
       -5px -10px 15px rgba(200,200,100,.2) inset;
   text-align: center;
+  margin: 5px;
 }
 
 .gauge label {
@@ -415,3 +425,25 @@ label {
   background-color: #0a0;
 }
 
+.lampsrow {
+  margin: 20px 30px;
+  text-align: center;
+}
+
+
+
+.lamp {
+  display: inline-block;
+  height: 60px;
+  width: 50px;
+  background-image: url('img/red-light-off.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  position: relative;
+  text-align: center;
+}
+
+.lamp.lampon {
+  background-image: url('img/red-light-on.png');
+}
