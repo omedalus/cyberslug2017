@@ -129,8 +129,35 @@ var getWorld = null;
     return odors;
   };
 
+  var checkForEatings = function() {
+    var proboscisPosition = world.hero.getProboscisPosition();
+    if (!proboscisPosition) {
+      return null;
+    }
+
+    var eaten = [];
+    _.each(world.prey, function(morsel) {
+      var dist = getToroidDistance(
+          morsel.position.x, morsel.position.y, 
+          proboscisPosition.x, proboscisPosition.y);
+      if (dist < 4) {
+        eaten.push(morsel);
+      }
+    });
+    
+    _.each(eaten, function(morsel) {
+      // Notify the hero that he's gotten some nutrients.
+      world.hero.eat(morsel);
+      
+      // "Remove" the prey from the world, but reincarnate it nearby.
+      createRandomMorselPosition(morsel);
+    });
+  };
+
 
   var tick = function(ticks) {
+    checkForEatings();
+    
     _.each(world.prey, function(morsel) {
       // Move the morsels per their heading.
       morsel.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
@@ -153,6 +180,26 @@ var getWorld = null;
 
     world.hero.tick(ticks);
   };
+  
+  var createRandomMorselPosition = function(morsel) {
+    morsel.position = null;
+
+    // Reroll position until it is not generated on top of our hero.
+    while (!morsel.position) {
+      var position = {
+        x: (Math.random() * world.size) - (world.size / 2),
+        y: (Math.random() * world.size) - (world.size / 2)
+      };
+      var distFromHero = Math.hypot(
+          position.x - world.hero.position.x,
+          position.y - world.hero.position.y);
+      if (distFromHero > 25) {
+        // Morsel was generated far away enough. This is good.
+        morsel.position = position;
+      }
+    }
+    morsel.position.angle = Math.random() * 2 * Math.PI;    
+  };
 
   var generatePrey = function(population) {
     world.prey = [];
@@ -163,23 +210,7 @@ var getWorld = null;
           species: species,
           position: null
         };
-        
-        // Reroll position for *each* morsel indefinitely
-        // until it is not generated on top of our hero.
-        while (!morsel.position) {
-          var position = {
-            x: (Math.random() * world.size) - (world.size / 2),
-            y: (Math.random() * world.size) - (world.size / 2)
-          };
-          var distFromHero = Math.hypot(
-              position.y - world.hero.position.y);
-          if (distFromHero > 25) {
-            // Morsel was generated far away enough. This is good.
-            morsel.position = position;
-          }
-        }
-        morsel.position.angle = Math.random() * 2 * Math.PI;
-
+        createRandomMorselPosition(morsel);
         world.prey.push(morsel);
       });
     });

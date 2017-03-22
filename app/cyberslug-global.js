@@ -8,9 +8,9 @@
     
     setup: {
       population: {
-        hermissenda: 1, //3
-        flabellina: 0, //10
-        faux: 0
+        hermissenda: 4,
+        flabellina: 10,
+        faux: 2
       }
     },
     

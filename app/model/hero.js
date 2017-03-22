@@ -105,8 +105,8 @@ var getHero = null;
     
     context.beginPath();
     context.moveTo(-8,0);
-    context.lineTo(-8, -50 - hero.proboscisExtension / 2);
-    context.lineTo(8, -50 - hero.proboscisExtension / 2);
+    context.lineTo(-8, -60 - hero.proboscisExtension / 2);
+    context.lineTo(8, -60 - hero.proboscisExtension / 2);
     context.lineTo(8, 0);
     context.closePath();
     context.fillStyle = '#a82';
@@ -278,7 +278,6 @@ var getHero = null;
     }
     hero.proboscisExtension = Math.min(hero.proboscisExtension, 20);
     hero.proboscisExtension = Math.max(hero.proboscisExtension, 0);
-    console.log(hero.proboscisExtension)
   };
 
   var tick = function(ticks) {
@@ -294,11 +293,46 @@ var getHero = null;
     hero.travelHistory.push([hero.position.x, hero.position.y]);
   };
   
+  var getProboscisPosition = function() {
+    if (hero.proboscisExtension < 11) {
+      return null;
+    }
+    return {
+      x: hero.position.x + 4 * Math.cos(hero.position.angle),
+      y: hero.position.y + 4 * Math.sin(hero.position.angle)
+    };
+  };
+  
+  var eat = function(morsel) {
+    // All morsels are worth 0.3 nutrition points, I guess.
+    hero.modelvars.nutrition += 0.3;
+    
+    if (morsel.species === 'hermissenda') {
+      hero.modelvars.Vh += 
+          hero.modelvars.alpha_hermi * 
+          hero.modelvars.beta_hermi *
+          (hero.modelvars.lambda_hermi - hero.modelvars.Vh);
+    } else if (morsel.species === 'flabellina') {
+      hero.modelvars.Vf += 
+          hero.modelvars.alpha_flab * 
+          hero.modelvars.beta_flab *
+          (hero.modelvars.lambda_flab - hero.modelvars.Vf);
+    } else if (morsel.spexies === 'faux') {
+      hero.modelvars.Vf += 
+          hero.modelvars.alpha_flab * 
+          hero.modelvars.beta_flab *
+          (0 - hero.modelvars.Vf);
+    }
+  };
+  
+  
   hero.reset = reset;
   hero.drawFrame = drawFrame;
   hero.tick = tick;
+  hero.eat = eat;
   
   hero.getSensorPositions = getSensorPositions;
+  hero.getProboscisPosition = getProboscisPosition;
   
   getHero = function() {
     return hero;
