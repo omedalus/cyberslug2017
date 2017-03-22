@@ -3,12 +3,12 @@
 
 cyberslugApp.directive('cyberslugGauge', ['$global', function($global) {
   var link = function(scope, element, attrs) {
+    $(element).addClass('gauge');    
     $(element).append('<div class="readout"><div class="readout-horiz-adjust"></div><div class="needle"></div></div>');
     $(element).append('<label/>');    
     
     scope.$global = $global;
-    
-    
+
     
     scope.$watch('cyberslugGauge', function(newValue, oldValue) {
       var scalepos = (newValue - scope.min) / (scope.max - scope.min);

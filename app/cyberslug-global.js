@@ -19,6 +19,13 @@
       tickinterval: {
         major: 10,
         minor: 1
+      },
+      
+      showtrail: false,
+      showodors: {
+        odor_hermi: true,
+        odor_flab: true,
+        odor_betaine: false
       }
     },
     

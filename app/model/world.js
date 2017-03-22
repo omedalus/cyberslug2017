@@ -35,7 +35,7 @@ var getWorld = null;
   
   var world = {};
   
-  var drawMorsel = function(context, morsel) {
+  var drawMorsel = function(context, morsel, displaysettings) {
     context.save();
     
     context.translate(morsel.position.x, morsel.position.y);
@@ -80,15 +80,14 @@ var getWorld = null;
         ((position.y + 1.5*world.size) % world.size) - .5*world.size;    
   };
   
-  var drawFrame = function(context) {
+  var drawFrame = function(context, displaysettings) {
     context.save();
     
     _.each(world.prey, function(morsel) {
-      drawMorsel(context, morsel);
+      drawMorsel(context, morsel, displaysettings);
     });
     
-    world.toroidPosition(world.hero.position);
-    world.hero.drawFrame(context);
+    world.hero.drawFrame(context, displaysettings);
 
     context.restore();
   };
@@ -179,6 +178,7 @@ var getWorld = null;
     });
 
     world.hero.tick(ticks);
+    world.toroidPosition(world.hero.position);
   };
   
   var createRandomMorselPosition = function(morsel) {

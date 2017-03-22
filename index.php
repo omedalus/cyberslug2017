@@ -18,6 +18,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <script src="app/cyberslug-global.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-dial.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-gauge.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-switch.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-game-canvas.js?nocache=<?php echo time(); ?>"></script>
 
     <title>Cyberslug 2017</title>
@@ -54,65 +55,66 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           <div id="rca-jacks"></div>
         
           <div id="dialrow" class="instrumentrow">
-            <div class="dial"
-                data-cyberslug-dial="setupCtrl.$global.setup.population.hermissenda"
+            <div data-cyberslug-dial="setupCtrl.$global.setup.population.hermissenda"
                 data-label="'hermissenda'"
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"
                 data-number-interval="5"></div>
-            <div class="dial"
-                data-cyberslug-dial="setupCtrl.$global.setup.population.flabellina"
+            <div data-cyberslug-dial="setupCtrl.$global.setup.population.flabellina"
                 data-label="'flabellina'"
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"
                 data-number-interval="5"></div>
-            <div class="dial"
-                data-cyberslug-dial="setupCtrl.$global.setup.population.faux"
+            <div data-cyberslug-dial="setupCtrl.$global.setup.population.faux"
                 data-label="'fauxflab'"
                 data-min="0"
                 data-max="15"
                 data-tick-interval="1"
                 data-number-interval="5"></div>
           </div> <!-- dialrow -->
+          
+          <div id="switchesrow" class="instrumentrow">
+            <div data-cyberslug-switch="setupCtrl.$global.displaysettings.showtrail"
+                data-label="'trail'">
+            </div>
+          </div> <!-- switchesrow -->
+          
+          
         </div> <!-- oscilloscopepanel -->
       </div>
       <div class="col-md-4 col-sm-6 col-lg-6">
         <div class="oscilloscopepanel" data-ng-controller="ReadoutCtrl as readoutCtrl">
           <div id="gaugesrow" class="instrumentrow">
-            <div class="gauge"
-                data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.nutrition"
+            <div data-cyberslug-gauge="readoutCtrl.hero.modelvars.nutrition"
                 data-label="'Nutrition'"
                 data-min="0"
                 data-max="1"
                 data-tick-interval=".1"
                 data-number-interval=".2"
-                data-readout-danger="readoutCtrl.$global.world.hero.modelvars.nutrition < 0.2"
-                data-readout-warning="readoutCtrl.$global.world.hero.modelvars.nutrition < 0.4"
-                data-readout-great="readoutCtrl.$global.world.hero.modelvars.nutrition > 0.7"
+                data-readout-danger="readoutCtrl.hero.modelvars.nutrition < 0.2"
+                data-readout-warning="readoutCtrl.hero.modelvars.nutrition < 0.4"
+                data-readout-great="readoutCtrl.hero.modelvars.nutrition > 0.7"
             ></div
-            ><div class="gauge"
-                data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.satiation"
+            ><div data-cyberslug-gauge="readoutCtrl.hero.modelvars.satiation"
                 data-label="'Satiation'"
                 data-min="0"
                 data-max=".5"
                 data-tick-interval=".05"
                 data-number-interval=".1"
-                data-readout-danger="readoutCtrl.$global.world.hero.modelvars.satiation < 0.1"
-                data-readout-warning="readoutCtrl.$global.world.hero.modelvars.satiation < 0.2"
-                data-readout-great="readoutCtrl.$global.world.hero.modelvars.satiation > 0.4"
+                data-readout-danger="readoutCtrl.hero.modelvars.satiation < 0.1"
+                data-readout-warning="readoutCtrl.hero.modelvars.satiation < 0.2"
+                data-readout-great="readoutCtrl.hero.modelvars.satiation > 0.4"
             ></div
-            ><div class="gauge"
-                data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.incentiveSalience"
+            ><div data-cyberslug-gauge="readoutCtrl.hero.modelvars.incentiveSalience"
                 data-label="'Incentive'"
                 data-min="0"
                 data-max="10"
                 data-tick-interval="1"
                 data-number-interval="5"
             ></div
-            ><div class="gauge"
-                data-cyberslug-gauge="readoutCtrl.$global.world.hero.modelvars.somaticMap"
+            ><div data-cyberslug-gauge="readoutCtrl.hero.modelvars.somaticMap"
                 data-label="'SomaticMap'"
                 data-min="-1"
                 data-max="1"
@@ -122,14 +124,15 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
             
           </div> <!-- gauges row -->
           
+          
           <div id="lampsrow" class="instrumentrow">
             <div class="lamp"
-                data-ng-class="{lampon: readoutCtrl.$global.world.hero.modelvars.appetiteSwitch < 0}"
+                data-ng-class="{lampon: readoutCtrl.hero.modelvars.appetiteSwitch < 0}"
             >
               <label>HUNGRY</label>
             </div>
-            
           </div> <!-- lamps row -->
+
         </div>
       </div>
 

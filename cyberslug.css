@@ -425,7 +425,7 @@ label {
   background-color: #0a0;
 }
 
-.lampsrow {
+#lampsrow {
   margin: 20px 30px;
   text-align: center;
 }
@@ -439,11 +439,28 @@ label {
   background-image: url('img/red-light-off.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center top;
+  background-position: center center;
   position: relative;
   text-align: center;
 }
 
 .lamp.lampon {
   background-image: url('img/red-light-on.png');
+}
+
+
+.switch {
+  display: inline-block;
+  height: 60px;
+  width: 50px;
+  background-image: url('img/switch-down.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+.switch.switchon {
+  background-image: url('img/switch-up.png');
 }

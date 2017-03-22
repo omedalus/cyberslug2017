@@ -3,6 +3,7 @@
 
 cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
   var link = function(scope, element, attrs) {
+    $(element).addClass('dial');
     $(element).append('<div class="base"><div class="knob"></div></div>');
     $(element).append('<label/>');
 

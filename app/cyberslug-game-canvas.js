@@ -167,7 +167,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     context.restore();
   };  
   
-  var drawFrame = function(context, element) {
+  var drawFrame = function(context, element, displaysettings) {
     context.save();
     
     setCanvasZoom(context, element);
@@ -175,7 +175,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     clearFrame(context);
     
     if (!!$global.world && !!$global.world.isInitialized) {
-      $global.world.drawFrame(context);
+      $global.world.drawFrame(context, displaysettings);
     }
 
     drawAxes(context);
@@ -188,7 +188,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
   var FPS = 30;
   
   var animate = function(context, element) {
-    drawFrame(context, element);
+    drawFrame(context, element, $global.displaysettings);
 
     if ($global.world.isInitialized) {
       if ($global.runstate === 'play') {

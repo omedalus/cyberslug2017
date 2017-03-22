@@ -10,6 +10,11 @@ cyberslugApp.controller('SetupCtrl', [
 {
   var setupCtrl = this;
   setupCtrl.$global = $global;
+  $scope.$global = $global;
+  
+  $scope.$watch('$global.world.hero', function(newValue) {
+    setupCtrl.hero = newValue;
+  });
 }]);
 
 cyberslugApp.controller('ReadoutCtrl', [
@@ -17,6 +22,11 @@ cyberslugApp.controller('ReadoutCtrl', [
 {
   var readoutCtrl = this;
   readoutCtrl.$global = $global;
+  $scope.$global = $global;
+  
+  $scope.$watch('$global.world.hero', function(newValue) {
+    readoutCtrl.hero = newValue;
+  });
 }]);
 
 

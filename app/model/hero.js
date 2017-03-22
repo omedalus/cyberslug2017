@@ -72,7 +72,7 @@ var getHero = null;
     // Everything restored again.
   };
   
-  var drawFrame = function(context) {
+  var drawFrame = function(context, displaysettings) {
     if (hero.isBeingPickedUp) {
       wiggletick += 3;
     }
@@ -83,7 +83,12 @@ var getHero = null;
       return;
     }
     
-    //drawTravelHistory(context);
+    if (!!displaysettings.showtrail) {
+      drawTravelHistory(context);
+    } else {
+      hero.travelHistory = [];
+    }
+    
     //drawSensorPositions(context);
     
     context.save();
@@ -312,6 +317,9 @@ var getHero = null;
     }
     
     hero.travelHistory.push([hero.position.x, hero.position.y]);
+    if (hero.travelHistory.length > 200) {
+      hero.travelHistory.shift();
+    }
   };
   
   var getProboscisPosition = function() {
