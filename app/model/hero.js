@@ -27,7 +27,7 @@ var getHero = null;
         x: hero.position.x + 7 * Math.cos(hero.position.angle + .7),
         y: hero.position.y + 7 * Math.sin(hero.position.angle + .7)
       }
-    }
+    };
   };
 
   var drawSensorPositions = function(context) {
@@ -174,17 +174,58 @@ var getHero = null;
     
     hero.sensors = {};
     
-    hero.modelvars = {};
+    hero.modelvars = {
+      nutrition: 0.5,
+      incentiveSalience: 0,
+      somaticMap: 0,
+      satiation: 0.5,
+      
+      Vf: 0,
+      Vh: 0,
+      alpha_hermi: 0.5,
+      beta_hermi: 1,
+      lambda_hermi: 1,
+      alpha_flab: 0.5,
+      beta_flab: 1,
+      lambda_flab: 1,
+    };
   };
 
-  var processPhysiologicalModel = function() {
-    console.log(hero.sensors)
+  var processPhysiologicalModel = function(ticks) {
+    hero.modelvars.nutrition *= Math.pow(0.9995, ticks);
+    hero.modelvars.satiation = 1 /
+        Math.po2((1 + 0.7 * Math.exp(-4 * hero.modelvars.nutrition + 2)), 2);
+
+    var knownOdors = ['odor_hermi', 'odor_flab', 'odor_betaine'];
+    hero.modelvars.odorMeans = _.map(knownOdors, function(odorname) {
+      var odorSensorScoreTotal = 0;
+      var numSensors = 0;
+      _.each(hero.sensors, function(sensorScores, sensorname) {
+        numSensors++;
+        if (!!sensorScores[odorname]) {
+          odorSensorScoreTotal += sensorScores[odorname];
+        }
+      });
+      return odorSensorScoreTotal / numSensors;
+    });
+
+    hero.modelvars.hermibias = 
+        hero.modelvars.odorMeans['odor_hermi'] -
+        hero.modelvars.odorMeans['odor_flab'];
+
+    var reward = 
+        hero.modelvars.odorMeans['odor_betaine'] /
+        (1 + (0.5 * hero.modelvars.Vh * hero.modelvars.odorMeans['odor_hermi'])
+            - 0.008 / hero.modelvars.satiation)
+        + 1.32 * hero.modelvars.Vh * hero.modelvars.odorMeans['odor_hermi'];
+    var rewardNeg = 1.32 * hero.modelvars.Vf * hero.modelvars.odorMeans['odor_flab'];
+    hero.modelvars.incentiveSalience = reward - rewardNeg;
   };
 
   var tick = function(ticks) {
     wiggletick += ticks;
     
-    processPhysiologicalModel();
+    processPhysiologicalModel(ticks);
 
     hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
     hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
