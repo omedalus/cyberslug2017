@@ -60,7 +60,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     
     <div id="prefetch-placeholder" style="display:none">
       <h1>Loading...</h1>
-      <progress></progress>
+      <div class="progress"><div class="progress-level"></div></div>
     </div>
     
     <div class="container-fluid" id="gamesurface" style="display:none">

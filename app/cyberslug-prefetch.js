@@ -19,10 +19,11 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
         $(scope.placeholder).css({display: ''});
       }
       
-      $('progress', scope.placeholder).each(function() {
-        var progressElem = this;
-        progressElem.max = maxWaiting;
-        progressElem.value = maxWaiting - prefetchPending.length;
+      $('.progress .progress-level', scope.placeholder).each(function() {
+        var scalepos = 1 - (prefetchPending.length / maxWaiting);
+        $(this).css({
+          left: (100 * scalepos) + '%'
+        });
       });
     };
 

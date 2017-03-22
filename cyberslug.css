@@ -29,6 +29,24 @@ body {
   text-shadow: 0 0 2px #0f0;
   font-family: monospace;
 }
+#prefetch-placeholder .progress {
+  width: 50%;
+  margin: auto;
+  box-shadow: 2px 2px 10px rgba(0,64,0,.8) inset;
+  background-color: #f5f5f5;
+  background-image: url(img/brushed-aluminum.jpg);
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #040;
+}
+.progress-level {
+  height: 100%;
+  background: #040;
+  position: absolute;
+  width: 100%;
+  box-shadow: -2px 2px 5px #000 inset;
+}
 
 
 canvas {
