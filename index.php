@@ -27,9 +27,31 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
   <body>
     <div data-cyberslug-prefetch="" style="display:none">
-      <img id='switch-up' src="img/switch-up.png" />
-      <img id='switch-down' src="img/switch-down.png" />
-      <img id='switch-down' src="img/switch-dowsdsadfsadfsadn.png" />
+      <img src='img/green-neuron-background.jpg'></img>
+      <img src='img/cyberslug.png'></img>
+      <img src='img/black-foam-texture.jpg'></img>
+      <img src='img/brushed-aluminum.jpg'></img>
+      <img src='img/black-leather-texture.jpg'></img>
+      <img src='img/screw-lf-dark.png'></img>
+      <img src='img/screw-rt-dark.png'></img>
+      <img src='img/skeuo-btn-blue.png'></img>
+      <img src='img/skeuo-btn-orange.png'></img>
+      <img src='img/glyph-play.png'></img>
+      <img src='img/glyph-play-active.png'></img>
+      <img src='img/glyph-stop.png'></img>
+      <img src='img/glyph-stop-active.png'></img>
+      <img src='img/glyph-ff.png'></img>
+      <img src='img/glyph-ff-active.png'></img>
+      <img src='img/glyph-step.png'></img>
+      <img src='img/glyph-step-active.png'></img>
+      <img src='img/rca-jacks.png'></img>
+      <img src='img/control-dial-base.png'></img>
+      <img src='img/control-dial-knob.png'></img>
+      <img src='img/copper-dark.jpg'></img>
+      <img src='img/red-light-off.png'></img>
+      <img src='img/red-light-on.png'></img>
+      <img src='img/switch-down.png'></img>
+      <img src='img/switch-up.png'></img>
     </div>
     
     <div class="container-fluid" id="gamesurface">

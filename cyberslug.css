@@ -7,7 +7,8 @@ button, input {
 }
 
 body {
-  background: url('img/green-neuron-background.jpg');
+  background-color: black;
+  background-image: url('img/green-neuron-background.jpg');
   background-attachment: fixed;
   background-size: cover;
   min-width: 700px;
@@ -227,7 +228,7 @@ canvas {
   content: '';
   height: 90px;
   width: 120px;
-  background-image: url(img/rca-jacks.png);
+  background-image: url('img/rca-jacks.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center bottom;
