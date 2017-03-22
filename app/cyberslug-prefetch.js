@@ -17,6 +17,8 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
         prefetchPending = _.without(prefetchPending, prefetchResource);
         if (prefetchPending.length === 0) {
           $global.prefetch.ready = true;
+          $(scope.cyberslugPrefetch).css({display: ''});
+          console.log(scope.cyberslugPrefetch)
         }
       };
       

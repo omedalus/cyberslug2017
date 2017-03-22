@@ -26,7 +26,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
   </head>
 
   <body>
-    <div data-cyberslug-prefetch="" style="display:none">
+    <div data-cyberslug-prefetch="'#gamesurface'" style="display:none">
       <img src='img/green-neuron-background.jpg'></img>
       <img src='img/cyberslug.png'></img>
       <img src='img/black-foam-texture.jpg'></img>
@@ -54,7 +54,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src='img/switch-up.png'></img>
     </div>
     
-    <div class="container-fluid" id="gamesurface">
+    <div class="container-fluid" id="gamesurface" style="display:none">
       <div class="col-md-8 col-lg-6 oscilloscopepanel" id="canvasholder">
         <canvas 
             width="500" 
