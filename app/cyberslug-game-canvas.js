@@ -222,6 +222,50 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     });
     
     animate(context, element);
+    
+    var getWorldCoordsOfMouseEvent = function(e) {
+      var elemOffset = element.offset();       
+      var x = e.pageX - elemOffset.left - (element.width() / 2);
+      var y = e.pageY - elemOffset.top - (element.height() / 2);
+      
+      x /= (element.width() / 2);
+      y /= (element.height() / 2);
+      
+      x *= $global.world.size / 2;
+      y *= $global.world.size / 2;
+      
+      return {x: x, y: y};
+    };
+    
+    var isMouseDown = false;
+    
+    $(element).mouseout(function(e) {
+      isMouseDown = false;
+    }).mouseup(function(e) {
+      isMouseDown = false;
+    }).mousedown(function(e) {
+      isMouseDown = true;
+    }).mousemove(function(e) {
+      var worldMousePosition = getWorldCoordsOfMouseEvent(e);
+      
+      var distToHero = 
+          Math.hypot(worldMousePosition.x - $global.world.hero.position.x, 
+              worldMousePosition.y - $global.world.hero.position.y);
+
+      $(element).removeClass('mouseoverhero mousegrabbinghero');
+      if (distToHero < 10) {
+        if (isMouseDown) {
+          $(element).addClass('mousegrabbinghero');
+          
+          $global.world.hero.position.x = worldMousePosition.x;
+          $global.world.hero.position.y = worldMousePosition.y;
+          scope.$apply();
+          
+        } else {
+          $(element).addClass('mouseoverhero');
+        }
+      }
+    });
   };
   
   return {

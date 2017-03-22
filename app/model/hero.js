@@ -179,6 +179,7 @@ var getHero = null;
       incentiveSalience: 0,
       somaticMap: 0,
       satiation: 0.5,
+      appetiteSwitch: 0,
       
       Vf: 0,
       Vh: 0,
@@ -196,8 +197,10 @@ var getHero = null;
     hero.modelvars.satiation = 1 /
         Math.pow((1 + 0.7 * Math.exp(-4 * hero.modelvars.nutrition + 2)), 2);
 
+    hero.modelvars.odorMeans = {};
+
     var knownOdors = ['odor_hermi', 'odor_flab', 'odor_betaine'];
-    hero.modelvars.odorMeans = _.map(knownOdors, function(odorname) {
+    _.each(knownOdors, function(odorname) {
       var odorSensorScoreTotal = 0;
       var numSensors = 0;
       _.each(hero.sensors, function(sensorScores, sensorname) {
@@ -206,10 +209,11 @@ var getHero = null;
           odorSensorScoreTotal += sensorScores[odorname];
         }
       });
-      return odorSensorScoreTotal / numSensors;
+      
+      hero.modelvars.odorMeans[odorname] = odorSensorScoreTotal / numSensors;
     });
 
-    hero.modelvars.hermibias = 
+    var hermibias = 
         hero.modelvars.odorMeans['odor_hermi'] -
         hero.modelvars.odorMeans['odor_flab'];
 
@@ -220,6 +224,29 @@ var getHero = null;
         + 1.32 * hero.modelvars.Vh * hero.modelvars.odorMeans['odor_hermi'];
     var rewardNeg = 1.32 * hero.modelvars.Vf * hero.modelvars.odorMeans['odor_flab'];
     hero.modelvars.incentiveSalience = reward - rewardNeg;
+
+    var somaticFlabLeft = 
+        (hero.sensors.left.odor_flab || 0) - (hero.sensors.right.odor_flab || 0);
+    var somaticHermiLeft = 
+        (hero.sensors.left.odor_hermi || 0) - (hero.sensors.right.odor_hermi || 0);
+    
+    hero.modelvars.somaticMap =
+        -(
+          somaticFlabLeft / (1 + Math.exp(-50 * -hermibias)) + 
+          somaticHermiLeft / (1 + Math.exp(-50 * hermibias))
+          );
+          
+    var appetiteState = 0.01 + 
+        (1 / (1 + Math.exp(-(hero.modelvars.incentiveSalience * 0.6) + 10 * hero.modelvars.satiation)) 
+            + 0.1 * ((hero.modelvars.appetiteSwitch - 1) * 0.5));
+            
+    hero.modelvars.appetiteSwitch = (((-2 / (1 + Math.exp(-100 * (appetiteState - 0.245)))) + 1));
+    
+    var turnAngle = 
+        (2 * hero.modelvars.appetiteSwitch) / 
+        (1 + Math.exp (3 * hero.modelvars.somaticMap)) - hero.modelvars.appetiteSwitch;
+        
+    hero.position.angle += (turnAngle / 10);
   };
 
   var tick = function(ticks) {

@@ -76,6 +76,17 @@ canvas {
     0 0px 60px 5px #000;
 }
 
+#gamecanvas.mouseoverhero {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+#gamecanvas.mousegrabbinghero {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
 
 
 #canvasnameplate {
