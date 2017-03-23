@@ -220,12 +220,6 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     } else {
       $global.prefetch.stopAudio('audio-squishcrawl');
     }
-    
-    if ($global.runstate === 'stop') {
-      $global.prefetch.getAudio('audio-bgmusic').pause();
-    } else {
-      $global.prefetch.getAudio('audio-bgmusic').play();
-    }
   };
   
   var link = function(scope, element, attrs) {
@@ -238,7 +232,21 @@ cyberslugApp.directive('cyberslugGameCanvas', [
           (newValue !== 'stop' && oldValue === 'stop')) {
         $global.world.reset($global);
       }
+      
       playSquishWalkAudio();
+      
+      if ($global.runstate === 'stop') {
+        $global.prefetch.stopAudio('audio-bgmusic');
+        $global.prefetch.stopAudio('audio-bgmusic-fast');
+      } 
+      else if ($global.runstate === 'ff') {
+        $global.prefetch.stopAudio('audio-bgmusic');
+        $global.prefetch.playAudio('audio-bgmusic-fast', true);
+      }
+      else {
+        $global.prefetch.playAudio('audio-bgmusic', true);
+        $global.prefetch.stopAudio('audio-bgmusic-fast');
+      }      
     });
     
     scope.$watch('$global.prefetch.ready', function() {

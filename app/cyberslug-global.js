@@ -61,9 +61,11 @@
       audioElem.volume = volume;
     }
     
-    audioElem.currentTime = 0;
-    audioElem.play();
     audioElem.loop = loop;
+    if (!loop) {
+      audioElem.currentTime = 0;
+    }
+    audioElem.play();
   };
   
   var stopAudio = function(audioid) {
