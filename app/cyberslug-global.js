@@ -4,7 +4,7 @@
 
 (function() {
   var global = {
-    runstate: 'play',
+    runstate: 'stop',
     
     prefetch: {
       ready: false,

@@ -29,7 +29,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <div 
         data-cyberslug-prefetch="'#gamesurface'" 
         data-placeholder="'#prefetch-placeholder'"
-        data-timeout="3000"
+        data-timeout="4000"
         style="display:none"
     >
       <img src="img/green-neuron-background.jpg"></img>
@@ -77,6 +77,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <div id="prefetch-placeholder" style="display:none">
       <h1>Loading...</h1>
       <div class="progress"><div class="progress-level"></div></div>
+      <div id="playbutton" style="display:none">Play</div>
     </div>
     
     <div class="container-fluid" id="gamesurface" style="display:none">

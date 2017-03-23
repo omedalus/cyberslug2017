@@ -3,8 +3,8 @@
 /* global cyberslugApp */
 
 cyberslugApp.directive('cyberslugGameCanvas', [
-    '$global', '$timeout',
-    function($global, $timeout) {
+    '$global', '$timeout', '$interval',
+    function($global, $timeout, $interval) {
 
   var setCanvasZoom = function(context, element) {
     element = $(element);
@@ -222,6 +222,21 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     }
   };
   
+  var playBackgroundMusic = function() {
+    if ($global.runstate === 'stop') {
+      $global.prefetch.stopAudio('audio-bgmusic');
+      $global.prefetch.stopAudio('audio-bgmusic-fast');
+    } 
+    else if ($global.runstate === 'ff') {
+      $global.prefetch.stopAudio('audio-bgmusic');
+      $global.prefetch.playAudio('audio-bgmusic-fast', true);
+    }
+    else {
+      $global.prefetch.playAudio('audio-bgmusic', true);
+      $global.prefetch.stopAudio('audio-bgmusic-fast');
+    }       
+  };
+  
   var link = function(scope, element, attrs) {
     var context = element[0].getContext('2d');
 
@@ -234,28 +249,19 @@ cyberslugApp.directive('cyberslugGameCanvas', [
       }
       
       playSquishWalkAudio();
-      
-      if ($global.runstate === 'stop') {
-        $global.prefetch.stopAudio('audio-bgmusic');
-        $global.prefetch.stopAudio('audio-bgmusic-fast');
-      } 
-      else if ($global.runstate === 'ff') {
-        $global.prefetch.stopAudio('audio-bgmusic');
-        $global.prefetch.playAudio('audio-bgmusic-fast', true);
-      }
-      else {
-        $global.prefetch.playAudio('audio-bgmusic', true);
-        $global.prefetch.stopAudio('audio-bgmusic-fast');
-      }      
+      playBackgroundMusic();
     });
-    
-    scope.$watch('$global.prefetch.ready', function() {
+
+    // Every second, make sure our background sounds are playing.
+    $interval(function() {
+      playBackgroundMusic();
       playSquishWalkAudio();
-    });
+    }, 1000);
+
     scope.$watch('$global.world.hero.isBeingPickedUp', function() {
       playSquishWalkAudio();
     });
-
+    
     animate(context, element);
     
     var getWorldCoordsOfMouseEvent = function(e) {

@@ -9,15 +9,6 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
     var prefetchPending = [];
     var maxWaiting = 0;
     
-    var setPrefetchReady = function() {
-      if (!$global.prefetch.ready) {
-        $global.prefetch.ready = true;
-        scope.$apply();
-        
-        $global.prefetch.playAudio('audio-bgmusic', true);
-      }
-    };
-    
     var updateVisibility = function() {
       if (!!$global.prefetch.ready) {
         $(scope.cyberslugPrefetch).css({display: ''});
@@ -35,6 +26,16 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
         });
       });
     };
+    
+    var setPrefetchReady = function() {
+      scope.$apply();
+      
+      $('#playbutton').css({display:''});
+      $('h1', scope.placeholder).css({display: 'none'});
+      $('.progress', scope.placeholder).css({display: 'none'});
+      
+      updateVisibility();
+    };    
 
     $(element).children().each(function() {
       var prefetchResource = this;
@@ -83,7 +84,19 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
     if (!!scope.timeout) {
       // After timeout milliseconds, fuck you you're ready.
       setTimeout(setPrefetchReady, scope.timeout);
-    }    
+    }
+
+    // We need an explicit Play button because
+    // on Chrome for mobile, the user needs to 
+    // interact with the site in order to activate sounds.
+    // It's a Chrome security thing.
+    var playbutton = $('#playbutton');
+    playbutton.click(function() {
+      $global.prefetch.ready = true;
+      $global.runstate = 'play';
+      scope.$apply();
+      updateVisibility();
+    });
   };
   
   return {

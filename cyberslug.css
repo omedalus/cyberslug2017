@@ -558,3 +558,22 @@ label[for=feedinghistory] {
   left: 0;
   height: 2em;
 }
+
+
+#playbutton {
+  font-size: 80px;
+  display: inline-block;
+  border: 2px solid;
+  padding: 0 40px;
+  border-radius: 40px;
+  background-color: rgba(0,32,0,.7);
+  transition: .1s linear all;
+  cursor: pointer;
+  box-shadow: 0 0 10px #fff;
+}
+
+#playbutton:hover {
+  background-color: rgba(0,64,0,.5);
+  text-shadow: 0 0 10px #fff;
+}
+
