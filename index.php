@@ -70,7 +70,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <audio id="audio-eatslurp" src="audio/eatslurp-dehumanized.wav"></audio>
       
       <audio id="audio-bgmusic" src="audio/172561__djgriffin__video-game-7.mp3" volume="0.5" loop="true"></audio>
-      <audio id="audio-bgmusic-fast" src="audio/369066__mrthenoronha__hurry-loop.mp3" volume="0.35" loop="true"></audio>
+      <audio id="audio-bgmusic-fast" src="audio/369066__mrthenoronha__hurry-loop.mp3" volume="0.2" loop="true"></audio>
     </div>
     
     <div id="prefetch-placeholder" style="display:none">
@@ -208,7 +208,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           
           <div id="feedingrow" class="instrumentrow">
             <div id="feedinghistory">
-              <label for="feedinghistory">EATEN</label>
               <div class="feedrow">
                 <label>HERMI EATEN</label>
                 <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.hermissenda}}</div>
