@@ -220,6 +220,12 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     } else {
       $global.prefetch.stopAudio('audio-squishcrawl');
     }
+    
+    if ($global.runstate === 'stop') {
+      $global.prefetch.getAudio('audio-bgmusic').pause();
+    } else {
+      $global.prefetch.getAudio('audio-bgmusic').play();
+    }
   };
   
   var link = function(scope, element, attrs) {
