@@ -37,6 +37,11 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
       }
       
       var unpend = function() {
+        if (!_.contains(prefetchPending, prefetchResource)) {
+          // It's nice that you're ready, but we aren't asking for you anymore.
+          return;
+        }
+        
         prefetchPending = _.without(prefetchPending, prefetchResource);
         if (prefetchPending.length === 0) {
           $global.prefetch.ready = true;

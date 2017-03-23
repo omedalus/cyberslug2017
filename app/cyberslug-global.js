@@ -1,6 +1,6 @@
 /* global cyberslugApp */
 /* global getWorld */
-
+/* global $ */
 
 (function() {
   var global = {
@@ -55,6 +55,12 @@
   
   var playAudio = function(audioid, loop) {
     var audioElem = getAudio(audioid);
+    
+    var volume = $(audioElem).attr('volume');
+    if (!!volume) {
+      audioElem.volume = volume;
+    }
+    
     audioElem.currentTime = 0;
     audioElem.play();
     audioElem.loop = loop;
