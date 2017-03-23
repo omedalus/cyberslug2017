@@ -97,6 +97,7 @@ canvas {
 #gamecanvas {
   background: black;
   margin: auto;
+  margin-bottom: 10px;
   
   border-radius: 10px;
   border: 2px solid #222;
@@ -121,14 +122,12 @@ canvas {
 
 
 #canvasnameplate {
-  margin: auto;
-  margin-top: 20px;
-  width: 500px;
-  padding: 0.5em 2em;
+  display: inline-block;
+  padding: 10px 40px;
   position: relative;
-  cursor: pointer;
   text-shadow: 1px 1px 2px #000;  
   user-select: none;
+  height: 80px;
 
   background-image: url('img/black-leather-texture.jpg');
   background-size: cover;
@@ -143,16 +142,16 @@ canvas {
 
   box-shadow: 
       1px 1px 2px rgba(0,0,0,.8), 
-      -1px -1px 3px rgba(200,200,200,.4);  
+      -1px -1px 3px rgba(200,200,200,.4); 
 }
 
 #canvasnameplate::before {
   content: '';
   height: 100%;
-  width: 28px;
+  width: 25px;
   position: absolute;
   top: 0;
-  left: 10px;
+  left: 5px;
   
   background-image: url('img/screw-lf-dark.png');
   background-repeat: no-repeat;
@@ -163,15 +162,27 @@ canvas {
 #canvasnameplate::after {
   content: '';
   height: 100%;
-  width: 28px;
+  width: 25px;
   position: absolute;
   top: 0;
-  right: 10px;
+  right: 5px;
 
   background-image: url('img/screw-rt-dark.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
+}
+
+.nameplate-title {
+  margin-bottom: 1em;
+}
+
+
+#metacontrols {
+  display: inline-block;
+  vertical-align: bottom;
+  height: 80px;
+  padding: 0 10px;
 }
 
 
@@ -290,6 +301,7 @@ canvas {
   height: 70px;
   position: relative;
   margin-bottom: 20px;
+  vertical-align: top;
   
   cursor: pointer;
 }
@@ -472,7 +484,7 @@ label {
 
 .lamp {
   display: inline-block;
-  height: 60px;
+  height: 50px;
   width: 50px;
   background-image: url('img/red-light-off.png');
   background-size: contain;
@@ -504,7 +516,7 @@ label {
   background-image: url('img/switch-up.png');
 }
 
-#displaycontrolsrow {
+.insetcontrolsrow {
   border: 1px solid #444;
   margin: 0 10px;
   border-radius: 5px;
@@ -575,5 +587,42 @@ label[for=feedinghistory] {
 #playbutton:hover {
   background-color: rgba(0,64,0,.5);
   text-shadow: 0 0 10px #fff;
+}
+
+#switch-info::after {
+  content: '';
+  width: 100%;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  background-image: url('img/glyph-info.png');
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+#switch-info.switchon::after {
+  background-image: url('img/glyph-info-active.png');
+}
+
+
+#dial-audio {
+  top: -7px;
+}
+
+#dial-audio::after {
+  content: '';
+  width: 100%;
+  height: 20px;
+  display: inline-block;
+  position: absolute;
+  bottom: -13px;
+  left: 0;
+  background-image: url('img/glyph-audio.png');
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 

@@ -83,12 +83,20 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
     var rebuildTicks = function() {
       $('.dialtick', element).remove();
       
+      if (!scope.tickInterval) {
+        return;
+      }
+      
       for (var iTick = scope.min; iTick <= scope.max; iTick += scope.tickInterval) {
         var tickelem = $('<div class="dialtick"><div class="tickmark">\u25cf</div></div>');
         tickelem.appendTo(element);
 
         if (!!scope.numberInterval && (iTick % scope.numberInterval) == 0) {
           tickelem.html(iTick + '<div class="tickmark">\u25ae</div>');
+        }
+        
+        if (scope.tickArray && scope.tickArray[iTick]) {
+          tickelem.html(scope.tickArray[iTick]);
         }
         
         var scalepos = 270 * (iTick - scope.min) / (scope.max - scope.min);
@@ -103,7 +111,14 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
     scope.$watch('tickInterval', rebuildTicks);
     
     scope.$watch('label', function(newValue) {
-      $('label', element).text(newValue.toUpperCase());
+      if (!newValue) {
+        $('label', element).hide();
+      } 
+      else {
+        $('label', element).
+            text(newValue.toUpperCase()).
+            show();
+      }
     });
   };
   
@@ -114,7 +129,8 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
       min: '=',
       tickInterval: '=',
       numberInterval: '=',
-      label: '='
+      label: '=',
+      tickArray: '='
     },
     link: link
   };

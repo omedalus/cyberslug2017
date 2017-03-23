@@ -33,6 +33,10 @@
         odor_betaine: false
       }
     },
+    
+    tutorial: {
+      active: true
+    }
   };
   
   global.world = getWorld(global);

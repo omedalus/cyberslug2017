@@ -51,6 +51,9 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/glyph-step-active.png"></img>
       <img src="img/glyph-pause.png"></img>
       <img src="img/glyph-pause-active.png"></img>
+      <img src="img/glyph-info.png"></img>
+      <img src="img/glyph-info-active.png"></img>
+      <img src="img/glyph-audio.png"></img>
       <img src="img/rca-jacks.png"></img>
       <img src="img/control-dial-base.png"></img>
       <img src="img/control-dial-knob.png"></img>
@@ -59,7 +62,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/red-light-on.png"></img>
       <img src="img/switch-down.png"></img>
       <img src="img/switch-up.png"></img>
-      
+
       <img src="fonts/digital_counter_7.ttf"></img>
       
       <audio id="audio-switch" src="audio/switch.mp3"></audio>
@@ -87,12 +90,27 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
             height="500" 
             id="gamecanvas"
             data-cyberslug-game-canvas=""></canvas>
-        <div id="canvasnameplate">
-          Cyberslug 2017<br/>
-          Dr. Rhanor Gillette et. al.<br/>
-          School of Molecular and Cellular Biology</br>
-          University of Illinois at Urbana-Champaign<br/>
-          Copyright 2017 &copy; Mikhail Voloshin. All rights reserved.
+            
+        <div id="belowcanvas">
+          <div id="canvasnameplate">
+            <div class="nameplate-title">Cyberslug 2017</div>
+            Dr. Rhanor Gillette et. al.<br/>
+            U. Illinois Urbana-Champaign
+            <div class="copyright">
+               &copy;2017 Mikhail Voloshin 
+            </div>
+          </div>
+          
+          <div data-ng-controller="MetacontrolsCtrl as metacontrolsCtrl"
+              id="metacontrols" class="instrumentrow insetcontrolsrow">
+            <div data-cyberslug-switch="metacontrolsCtrl.$global.tutorial.active" id="switch-info"></div>
+            <div data-cyberslug-dial="metacontrolsCtrl.$global.displaysettings.audiolevel" 
+                id="dial-audio"
+                data-min="0"
+                data-max="3"
+                data-tick-interval="1""
+            ></div>
+          </div>
         </div>
       </div>
       <div class="col-md-4 col-sm-6 col-lg-6">
@@ -130,7 +148,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-number-interval="5"></div>
           </div> <!-- dialrow -->
           
-          <div id="displaycontrolsrow" class="instrumentrow">
+          <div id="displaycontrolsrow" class="instrumentrow insetcontrolsrow">
             <div data-cyberslug-dial="setupCtrl.$global.displaysettings.showtrail"
                 data-label="'trail'"
                 data-min="0"
