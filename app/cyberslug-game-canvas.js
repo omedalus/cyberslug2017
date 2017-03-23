@@ -208,6 +208,19 @@ cyberslugApp.directive('cyberslugGameCanvas', [
       animate(context, element);
     }, 1000 / FPS);
   };
+
+  var playSquishWalkAudio = function() {
+    var shouldPlaySquishCrawl = 
+        ($global.runstate === 'play' || $global.runstate === 'ff');
+    shouldPlaySquishCrawl = shouldPlaySquishCrawl &&
+        !$global.world.hero.isBeingPickedUp;
+    
+    if (shouldPlaySquishCrawl) {
+      $global.prefetch.playAudio('audio-squishcrawl', true);
+    } else {
+      $global.prefetch.stopAudio('audio-squishcrawl');
+    }
+  };
   
   var link = function(scope, element, attrs) {
     var context = element[0].getContext('2d');
@@ -219,8 +232,16 @@ cyberslugApp.directive('cyberslugGameCanvas', [
           (newValue !== 'stop' && oldValue === 'stop')) {
         $global.world.reset($global);
       }
+      playSquishWalkAudio();
     });
     
+    scope.$watch('$global.prefetch.ready', function() {
+      playSquishWalkAudio();
+    });
+    scope.$watch('$global.world.hero.isBeingPickedUp', function() {
+      playSquishWalkAudio();
+    });
+
     animate(context, element);
     
     var getWorldCoordsOfMouseEvent = function(e) {
@@ -239,12 +260,26 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     
     var isMouseDown = false;
     
+    var setHeroPickupState = function(newState) {
+      if ($global.world.hero.isBeingPickedUp && !newState) {
+        // He was being picked up, but not anymore.
+        $global.prefetch.playAudio('audio-splatdown');
+      }
+      else if (!$global.world.hero.isBeingPickedUp && newState) {
+        // He just got picked up.
+        $global.prefetch.playAudio('audio-squishypop');
+      }
+      
+      $global.world.hero.isBeingPickedUp = newState;
+      scope.$apply();
+    };
+    
     $(element).mouseout(function(e) {
-      $global.world.hero.isBeingPickedUp = false;
       isMouseDown = false;
+      setHeroPickupState(false);
     }).mouseup(function(e) {
-      $global.world.hero.isBeingPickedUp = false;
       isMouseDown = false;
+      setHeroPickupState(false);
     }).mousedown(function(e) {
       isMouseDown = true;
     }).mousemove(function(e) {
@@ -258,7 +293,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
       if (distToHero < 10) {
         if (isMouseDown) {
           $(element).addClass('mousegrabbinghero');
-          $global.world.hero.isBeingPickedUp = true;
+          setHeroPickupState(true);
           
           $global.world.hero.position.x = worldMousePosition.x;
           $global.world.hero.position.y = worldMousePosition.y;
@@ -266,7 +301,7 @@ cyberslugApp.directive('cyberslugGameCanvas', [
           
         } else {
           $(element).addClass('mouseoverhero');
-          $global.world.hero.isBeingPickedUp = false;
+          setHeroPickupState(false);
         }
       }
     });

@@ -33,9 +33,9 @@
         odor_betaine: false
       }
     },
-    
-    world: getWorld()
   };
+  
+  global.world = getWorld(global);
 
   // Returns a usable audio element, even if it's a dummy.
   var getAudio = function(audioid) {
@@ -52,11 +52,12 @@
     
     return audioElem;
   };
-
-  var playAudio = function(audioid) {
+  
+  var playAudio = function(audioid, loop) {
     var audioElem = getAudio(audioid);
     audioElem.currentTime = 0;
     audioElem.play();
+    audioElem.loop = loop;
   };
   
   var stopAudio = function(audioid) {

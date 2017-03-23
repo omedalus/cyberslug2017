@@ -151,6 +151,12 @@ var getWorld = null;
       // Notify the hero that he's gotten some nutrients.
       world.hero.eat(morsel);
       
+      // Play the eating noise. It sucks to mix interface into here, but
+      // it's good enough.
+      if (world.global && world.global.prefetch) {
+        world.global.prefetch.playAudio('audio-eatslurp');
+      }
+      
       // "Remove" the prey from the world, but reincarnate it nearby.
       createRandomMorselPosition(morsel);
     });
@@ -242,7 +248,10 @@ var getWorld = null;
 
   world.isInitialized = false;
   
-  getWorld = function() {
+  getWorld = function(globalSvc) {
+    if (world) {
+      world.global = globalSvc;
+    }
     return world;
   };
 }());

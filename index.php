@@ -31,37 +31,43 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
         data-placeholder="'#prefetch-placeholder'"
         style="display:none"
     >
-      <img src='img/green-neuron-background.jpg'></img>
-      <img src='img/cyberslug.png'></img>
-      <img src='img/black-foam-texture.jpg'></img>
-      <img src='img/brushed-aluminum.jpg'></img>
-      <img src='img/black-leather-texture.jpg'></img>
-      <img src='img/screw-lf-dark.png'></img>
-      <img src='img/screw-rt-dark.png'></img>
-      <img src='img/skeuo-btn-blue.png'></img>
-      <img src='img/skeuo-btn-orange.png'></img>
-      <img src='img/glyph-play.png'></img>
-      <img src='img/glyph-play-active.png'></img>
-      <img src='img/glyph-stop.png'></img>
-      <img src='img/glyph-stop-active.png'></img>
-      <img src='img/glyph-ff.png'></img>
-      <img src='img/glyph-ff-active.png'></img>
-      <img src='img/glyph-step.png'></img>
-      <img src='img/glyph-step-active.png'></img>
-      <img src='img/glyph-pause.png'></img>
-      <img src='img/glyph-pause-active.png'></img>
-      <img src='img/rca-jacks.png'></img>
-      <img src='img/control-dial-base.png'></img>
-      <img src='img/control-dial-knob.png'></img>
-      <img src='img/copper-dark.jpg'></img>
-      <img src='img/red-light-off.png'></img>
-      <img src='img/red-light-on.png'></img>
-      <img src='img/switch-down.png'></img>
-      <img src='img/switch-up.png'></img>
+      <img src="img/green-neuron-background.jpg"></img>
+      <img src="img/cyberslug.png"></img>
+      <img src="img/black-foam-texture.jpg"></img>
+      <img src="img/brushed-aluminum.jpg"></img>
+      <img src="img/black-leather-texture.jpg"></img>
+      <img src="img/screw-lf-dark.png"></img>
+      <img src="img/screw-rt-dark.png"></img>
+      <img src="img/skeuo-btn-blue.png"></img>
+      <img src="img/skeuo-btn-orange.png"></img>
+      <img src="img/glyph-play.png"></img>
+      <img src="img/glyph-play-active.png"></img>
+      <img src="img/glyph-stop.png"></img>
+      <img src="img/glyph-stop-active.png"></img>
+      <img src="img/glyph-ff.png"></img>
+      <img src="img/glyph-ff-active.png"></img>
+      <img src="img/glyph-step.png"></img>
+      <img src="img/glyph-step-active.png"></img>
+      <img src="img/glyph-pause.png"></img>
+      <img src="img/glyph-pause-active.png"></img>
+      <img src="img/rca-jacks.png"></img>
+      <img src="img/control-dial-base.png"></img>
+      <img src="img/control-dial-knob.png"></img>
+      <img src="img/copper-dark.jpg"></img>
+      <img src="img/red-light-off.png"></img>
+      <img src="img/red-light-on.png"></img>
+      <img src="img/switch-down.png"></img>
+      <img src="img/switch-up.png"></img>
+      
+      <img src="fonts/SFDigitalReadout-Heavy.ttf"></img>
       
       <audio id="audio-switch" src="audio/switch.mp3"></audio>
       <audio id="audio-button" src="audio/button.mp3"></audio>
       <audio id="audio-dialtick" src="audio/dialtick.wav"></audio>
+      <audio id="audio-squishypop" src="audio/squishypop.wav"></audio>
+      <audio id="audio-splatdown" src="audio/splat-quick.wav"></audio>
+      <audio id="audio-squishcrawl" src="audio/squishcrawl.wav"></audio>
+      <audio id="audio-eatslurp" src="audio/eatslurp-dehumanized.wav"></audio>
     </div>
     
     <div id="prefetch-placeholder" style="display:none">
@@ -183,7 +189,22 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           </div> <!-- gauges row -->
           
           
-          <div id="lampsrow" class="instrumentrow">
+          <div id="feedingrow" class="instrumentrow">
+            <div id="feedinghistory">
+              <div class="feedrow">
+                <label>HERMI</label>
+                <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.hermissenda}}</div>
+              </div>
+              <div class="feedrow">
+                <label>FLAB</label>
+                <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.flabellina}}</div>
+              </div>
+              <div class="feedrow">
+                <label>FAUX</label>
+                <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.faux}}</div>
+              </div>
+            </div>
+            
             <div class="lamp"
                 data-ng-class="{lampon: readoutCtrl.hero.modelvars.appetiteSwitch < 0}"
             >

@@ -221,6 +221,8 @@ var getHero = null;
     };
     hero.travelHistory = [];
     
+    hero.feedcount = {};
+    
     hero.sensors = {};
     
     hero.proboscisExtension = 0;
@@ -329,12 +331,14 @@ var getHero = null;
       hero.position.angle += ticks * 0.02 * Math.random() - ticks * 0.01;
       hero.position.x += ticks * .1 * Math.cos(hero.position.angle);
       hero.position.y += ticks * .1 * Math.sin(hero.position.angle);
-    }
-    
-    hero.travelHistory.push([hero.position.x, hero.position.y, ticks]);
-    if (hero.travelHistory.length > 5000) {
-      // That's way too much history to record! Start trimming.
-      hero.travelHistory.shift();
+
+      hero.travelHistory.push([hero.position.x, hero.position.y, ticks]);
+      if (hero.travelHistory.length > 5000) {
+        // That's way too much history to record! Start trimming.
+        hero.travelHistory.shift();
+      }
+    } else {
+      hero.travelHistory = [];
     }
   };
   
@@ -351,7 +355,10 @@ var getHero = null;
   var eat = function(morsel) {
     // All morsels are worth 0.3 nutrition points, I guess.
     hero.modelvars.nutrition += 0.3;
-    
+
+    hero.feedcount[morsel.species] = 
+        1 + (hero.feedcount[morsel.species] || 0);
+
     if (morsel.species === 'hermissenda') {
       hero.modelvars.Vh += 
           hero.modelvars.alpha_hermi * 
