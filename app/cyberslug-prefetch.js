@@ -9,6 +9,15 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
     var prefetchPending = [];
     var maxWaiting = 0;
     
+    var setPrefetchReady = function() {
+      if (!$global.prefetch.ready) {
+        $global.prefetch.ready = true;
+        scope.$apply();
+        
+        $global.prefetch.playAudio('audio-bgmusic', true);
+      }
+    };
+    
     var updateVisibility = function() {
       if (!!$global.prefetch.ready) {
         $(scope.cyberslugPrefetch).css({display: ''});
@@ -44,10 +53,7 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
         
         prefetchPending = _.without(prefetchPending, prefetchResource);
         if (prefetchPending.length === 0) {
-          $global.prefetch.ready = true;
-          scope.$apply();
-          
-          $global.prefetch.playAudio('audio-bgmusic', true);
+          setPrefetchReady();
         }
         updateVisibility();
       };
@@ -73,12 +79,18 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
     });
     
     updateVisibility();
+
+    if (!!scope.timeout) {
+      // After timeout milliseconds, fuck you you're ready.
+      setTimeout(setPrefetchReady, scope.timeout);
+    }    
   };
   
   return {
     scope: {
       cyberslugPrefetch: '=',
-      placeholder: '='
+      placeholder: '=',
+      timeout: '='
     },
     link: link
   };

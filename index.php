@@ -29,6 +29,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <div 
         data-cyberslug-prefetch="'#gamesurface'" 
         data-placeholder="'#prefetch-placeholder'"
+        data-timeout="3000"
         style="display:none"
     >
       <img src="img/green-neuron-background.jpg"></img>
