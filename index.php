@@ -68,6 +68,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <audio id="audio-splatdown" src="audio/splat-quick.wav"></audio>
       <audio id="audio-squishcrawl" src="audio/squishcrawl.wav"></audio>
       <audio id="audio-eatslurp" src="audio/eatslurp-dehumanized.wav"></audio>
+      
+      <audio id="audio-bgmusic" src="audio/puzzle_solver.mp3"></audio>
     </div>
     
     <div id="prefetch-placeholder" style="display:none">

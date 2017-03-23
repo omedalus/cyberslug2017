@@ -41,6 +41,8 @@ cyberslugApp.directive('cyberslugPrefetch', ['$global', function($global) {
         if (prefetchPending.length === 0) {
           $global.prefetch.ready = true;
           scope.$apply();
+          
+          $global.prefetch.playAudio('audio-bgmusic', true);
         }
         updateVisibility();
       };
