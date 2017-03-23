@@ -59,7 +59,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/switch-down.png"></img>
       <img src="img/switch-up.png"></img>
       
-      <img src="fonts/SFDigitalReadout-Heavy.ttf"></img>
+      <img src="fonts/digital_counter_7.ttf"></img>
       
       <audio id="audio-switch" src="audio/switch.mp3"></audio>
       <audio id="audio-button" src="audio/button.mp3"></audio>
@@ -184,6 +184,20 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
                 data-max="1"
                 data-tick-interval=".1"
                 data-number-interval=".5"
+            ></div
+            ><div data-cyberslug-gauge="readoutCtrl.hero.modelvars.Vh"
+                data-label="'V_hermi'"
+                data-min="0"
+                data-max="1"
+                data-tick-interval=".1"
+                data-number-interval=".5"
+            ></div
+            ><div data-cyberslug-gauge="readoutCtrl.hero.modelvars.Vf"
+                data-label="'V_flab'"
+                data-min="0"
+                data-max="1"
+                data-tick-interval=".1"
+                data-number-interval=".5"
             ></div>
             
           </div> <!-- gauges row -->
@@ -191,16 +205,17 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           
           <div id="feedingrow" class="instrumentrow">
             <div id="feedinghistory">
+              <label for="feedinghistory">EATEN</label>
               <div class="feedrow">
-                <label>HERMI</label>
+                <label>HERMI EATEN</label>
                 <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.hermissenda}}</div>
               </div>
               <div class="feedrow">
-                <label>FLAB</label>
+                <label>FLAB EATEN</label>
                 <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.flabellina}}</div>
               </div>
               <div class="feedrow">
-                <label>FAUX</label>
+                <label>FAUX EATEN</label>
                 <div class="feedcount">{{0 + readoutCtrl.hero.feedcount.faux}}</div>
               </div>
             </div>

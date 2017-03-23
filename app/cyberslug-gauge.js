@@ -14,6 +14,8 @@ cyberslugApp.directive('cyberslugGauge', ['$global', function($global) {
       var scalepos = (newValue - scope.min) / (scope.max - scope.min);
       scalepos = Math.max(scalepos, 0);
       scalepos = Math.min(scalepos, 1);
+      // Fit to the horizontal adjust, which is 80% as wide as the full gauge display.
+      scalepos = .8 * scalepos + .1;
       $('.needle', element).css({
         left: (scalepos * 100) + '%'
       });
@@ -37,9 +39,13 @@ cyberslugApp.directive('cyberslugGauge', ['$global', function($global) {
             var number = Math.round(iTick * 10) / 10;
             lastNumber = number;
 
-            var numberstr = '' + number;
-            if (number > 0 && number < 1) {
+            // All this to remove leading zeroes.
+            var numberstr = '' + Math.abs(number);
+            if (number !== 0 && Math.abs(number) < 1) {
               numberstr = numberstr.substring(1);
+            }
+            if (number < 0) {
+              numberstr = '-' + numberstr;
             }
             
             tickelem.html(numberstr + '<div class="tickmark">|</div>');
