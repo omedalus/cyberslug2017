@@ -657,6 +657,7 @@ label[for=feedinghistory] {
   height: auto;
   opacity: 1;
   z-index: auto;
+  overflow: visible;
 }
 
 .rhanorside::before {
@@ -705,4 +706,27 @@ label[for=feedinghistory] {
 }
 .tutorialoverlay button:active {
   color: #cfc;
+}
+
+
+.tutorialspan-morsel {
+  font-weight: bold;
+}
+.tutorialspan-hermi {
+  color: #0c0; 
+}
+.tutorialspan-flab {
+  color: #c00; 
+}
+.tutorialspan-faux {
+  color: #66c; 
+}
+
+img.inline-glyph {
+  height: 1em;
+}
+
+@keyframes bounce-up {
+  from {transform: translate(0, 0);}
+  to {transform: translate(0, -5px);}
 }

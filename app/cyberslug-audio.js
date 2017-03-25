@@ -92,8 +92,10 @@ cyberslugApp.factory('$audio', ['$global', '$rootScope',
         return;
       }
       var audioElem = element[0];
-      audioElem.volume = audioElem.dataset.volumeBeforeBlur;
-      delete audioElem.dataset.volumeBeforeBlur;
+      if (audioElem.dataset.volumeBeforeBlur) {
+        audioElem.volume = audioElem.dataset.volumeBeforeBlur;
+        delete audioElem.dataset.volumeBeforeBlur;
+      }
     });    
   });
 

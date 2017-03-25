@@ -28,6 +28,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
   </head>
 
   <body>
+    
     <div 
         data-cyberslug-prefetch="'#gamesurface'" 
         data-placeholder="'#prefetch-placeholder'"
@@ -59,6 +60,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/glyph-audio-1.png"></img>
       <img src="img/glyph-audio-2.png"></img>
       <img src="img/glyph-audio-3.png"></img>
+      <img src="img/glyph-down-arrow.png"></img>
       <img src="img/rca-jacks.png"></img>
       <img src="img/control-dial-base.png"></img>
       <img src="img/control-dial-knob.png"></img>
@@ -67,6 +69,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/red-light-on.png"></img>
       <img src="img/switch-down.png"></img>
       <img src="img/switch-up.png"></img>
+      <img src="img/downwards_glowing_green_arrow.png"></img>
 
       <img src="img/rhanor/rhanor-noise/rhanor-noise.gif"></img>
 
@@ -305,11 +308,20 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       </div>
       
       
-      <div id="tutorial">
+      
+      
+      
+
+      
+      
+      <div id="tutorial" data-ng-controller="TutorialCtrl as tutorialCtrl">
         <div 
-            data-cyberslug-tutorial="'body'"
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#gamesurface'"
+            id="tutorial-intro"
             class="tutorialoverlay rhanorside"
-            data-appear-after="750"
+            data-appear-after-delay="750"
+            data-only-show-once="true"
             >
           <header>Introduction</header>
           <div class="tutorialpage" data-tutorial-page="0">
@@ -327,7 +339,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               teaching you how everything works here.
             </p>
             <div class="buttonrow">
-              <button data-ng-click="tutorialpage = tutorialpage + 1">
+              <button data-ng-click="tutorialCtrl.nextPage()">
                 Next
               </button>
             </div>
@@ -347,7 +359,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               sea slugs like <em>Flabellina</em> and <em>Hermissenda</em>. 
             </p>
             <div class="buttonrow">
-              <button data-ng-click="tutorialpage = tutorialpage + 1">
+              <button data-ng-click="tutorialCtrl.nextPage()">
                 Next
               </button>
             </div>
@@ -364,7 +376,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               the principles of operation aren't necessarily all that different.
             </p>
             <div class="buttonrow">
-              <button data-ng-click="tutorialpage = tutorialpage + 1">
+              <button data-ng-click="tutorialCtrl.nextPage()">
                 Next
               </button>
             </div>
@@ -376,7 +388,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               That's what you're looking at right now.
             </p>
             <div class="buttonrow">
-              <button data-ng-click="tutorialpage = tutorialpage + 1">
+              <button data-ng-click="tutorialCtrl.nextPage()">
                 Next
               </button>
             </div>
@@ -387,14 +399,14 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               forages amongst three different kinds of prey.
             </p>
             <p>
-              <span style="color:#0c0; font-weight:bold">
+              <span class="tutorialspan-morsel tutorialspan-hermi">
                 Hermissenda
               </span>
               are nutritious and lack natural defenses, so they're 
               Cyberslug's favorite food.
             </p>
             <p>
-              <span style="color:#c00; font-weight:bold">
+              <span class="tutorialspan-morsel tutorialspan-flab">
                 Flabellina
               </span>
               are just as nutritious, but have toxic spines.
@@ -402,7 +414,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               hungry.
             </p>
             <p>
-              <span style="color:#66c; font-weight:bold">
+              <span class="tutorialspan-morsel tutorialspan-faux">
                 Faux
               </span>
               is a Batesian mimic. It exudes a chemical odor signature
@@ -410,29 +422,84 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               but doesn't have those toxic spines.
             </p>
             <div class="buttonrow">
-              <button data-ng-click="tutorialpage = tutorialpage + 1">
+              <button data-ng-click="tutorialCtrl.nextPage()">
                 Next
               </button>
             </div>
           </div> <!-- page 4 -->
           <div class="tutorialpage" data-tutorial-page="5">
             <p>
-              We've charted enough of this creature's brain to build a 
-              software simulation of some of its decision-making circuitry.
-              That's what you're looking at right now.
+              With only a handful of neurons controlling its actions,
+              the <em>Pleurobranchaea</em> is able to strategize
+              about what to eat and where to go. By making the right 
+              choices, it's able to make optimal use of its food
+              resources, acquiring enough nutrition to survive while
+              generally avoiding harm as much as possible.
             </p>
             <div class="buttonrow">
-              <button data-ng-click="tutorialpage = tutorialpage + 1">
+              <button data-ng-click="tutorialCtrl.nextPage()">
                 Next
               </button>
             </div>
           </div> <!-- page 5 -->
+          <div class="tutorialpage" data-tutorial-page="6">
+            <p>
+              Cyberslug lets you watch this decision-making process in 
+              real time. The equipment around you gives you an inside
+              view into the slug's decision-making processes, opening
+              a window into the neural pathways that make this 
+              animal's behavior possible.
+            </p>
+            <p>
+              In our lab, we think this is pretty interesting in its own right!
+              But we also believe that a software simulation of the slug's 
+              simple yet powerful neurocircuitry could yield applications
+              in robotics and intelligent agent design.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialCtrl.nextPage()">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 6 -->
+          <div class="tutorialpage" data-tutorial-page="7">
+            <p>
+              Well I've certainly done enough talking for now! I'll let you
+              play around for yourself.
+            </p>
+            <p>
+              I'll stick around nearby. If you have any questions about 
+              any of the equipment, simply <strong>hover over any control</strong>
+              and I'll pop up and tell you all about it.
+            </p>
+            <p>
+              Once you don't need me anymore, flip the "Info" switch below you 
+              (the one with the <img class="inline-glyph" src="img/glyph-info-active.png" />
+              icon), and I'll get out of your hair.
+            </p>
+            <p>
+              Have a good science!
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialCtrl.dismiss()">
+                OK
+              </button>
+            </div>
+            
+            <div style="position:absolute;right:136px;top:432px;animation: bounce-up ease-in-out .5s infinite alternate;">
+              <img src="img/downwards_glowing_green_arrow.png"></img>
+            </div>
+          </div> <!-- page 7 -->
+          
+          
         </div> <!-- intro -->
   
         <div 
-            data-cyberslug-tutorial="'#dial-audio'"
+            id="tutorial-dial-audio"
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#dial-audio'"
             class="tutorialoverlay"
-            data-appear-after="750"
+            data-appear-after-delay="750"
             data-disappear-on-mouseout="true"
             >
           <header>Audio Control</header>

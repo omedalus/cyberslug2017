@@ -61,5 +61,19 @@ cyberslugApp.controller('TutorialCtrl', [
   var ctrl = this;
   ctrl.$global = $global;
   $scope.$global = $global;
+  
+  ctrl.currentTutorialElement = null;
+  ctrl.tutorialpage = 0;
+  
+  ctrl.nextPage = function() {
+    ctrl.tutorialpage++;
+  };
+  
+  ctrl.dismiss = function() {
+    if (!ctrl.currentTutorialElement) {
+      return;
+    }
+    ctrl.currentTutorialElement.removeClass('showing');
+  };
 }]);
 
