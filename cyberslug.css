@@ -690,6 +690,10 @@ label[for=feedinghistory] {
   font-weight: bold;
 }
 
+.tutorialoverlay li {
+  margin-bottom: 10px;
+}
+
 .tutorialoverlay .buttonrow {
   text-align: right;
   margin-top: 20px;

@@ -559,7 +559,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
             data-appear-after-delay="750"
             data-disappear-on-mouseout="true"
             >
-          <header>About Cyberslug 2017</header>
+          <header>Summon Dr. Rhanor Gillette</header>
           <p>
             Flip this switch if you don't want to keep seeing me 
             pop up here anymore. Dont worry, though &mdash; I won't be far!
@@ -600,7 +600,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               </span>, which has no natural defenses and represents
               nothing but pure nutrients.
               Like            
-              <a href="https://www.youtube.com/watch?v=FkpCP9R1Jjc">
+              <a target="_blank" href="https://www.youtube.com/watch?v=FkpCP9R1Jjc">
                 Ryan Gosling refusing to eat his cereal
               </a>, the slug will turn away from the delicious morsel.
             </p>
@@ -624,7 +624,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           </div>
           <div class="tutorialpage" data-tutorial-page="2">
             <p>
-              But, like <a href="https://www.youtube.com/watch?v=MixNh9L7G5M">
+              But, like <a target="_blank" href="https://www.youtube.com/watch?v=MixNh9L7G5M">
                 Joe Pesci in a Snicker's commercial
               </a>,
               the slug acts different when it's hungry. When its stomach
@@ -652,7 +652,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
             </p>
             <p>
               We know that 
-              <a href="https://www.psychologytoday.com/blog/neuronarrative/201405/youre-not-yourself-when-youre-hungry-and-thats-problem">
+              <a target="_blank"
+                  href="https://www.psychologytoday.com/blog/neuronarrative/201405/youre-not-yourself-when-youre-hungry-and-thats-problem">
                 humans act more or less the same way
               </a>. That's why we research these animals &mdash;
               because, for all our language and technology and culture and art 
@@ -667,7 +668,99 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           </div>
         </div> <!-- app-state-indicator -->
         
-  
+        <div 
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#feedinghistory'"
+            class="tutorialoverlay"
+            data-appear-after-delay="750"
+            data-disappear-on-mouseout="true"
+            >
+          <header>Feeding History</header>
+          <p>
+            This readout shows how many organisms of each species
+            the slug has eaten.
+          </p>
+          <p>
+            You'll probably notice that, over time,
+            the slug eats more 
+            <span class="tutorialspan-morsel tutorialspan-hermi">
+              Hermissenda
+            </span>
+            than any other prey type, even if Hermis are relative 
+            rare and sparse in the environment. This is a rather
+            big deal! It means that the slug is correctly avoiding
+            <span class="tutorialspan-morsel tutorialspan-flab">Flabellina</span>, 
+            seeing no point in risking its safety on 
+            Flabellina's natural defenses except in extreme 
+            caloric emergencies &mdash; which, if the slug is 
+            doing its job of foraging correctly, should be rare.
+          </p>
+        </div> <!-- feeding-history -->
+        
+        <div 
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#buttonrow'"
+            class="tutorialoverlay"
+            data-appear-after-delay="750"
+            data-disappear-on-mouseout="true"
+            >
+          <header>Simulation Run Controls</header>
+          <p>
+            This row of buttons allows you to start and stop the simulation.
+            <ul>
+              <li><strong>Stop</strong>: Stop and reset the simulation.
+              The next time you hit any of the other buttons, the 
+              simulation will restart with a new population of prey.
+              This will make the Feeding History counters reset, too.</li>
+              <li><strong>Play</strong>: Run the simulation at normal speed.</li>
+              <li><strong>Fast Forward</strong>: Run the simulation at accelerated speed.</li>
+              <li><strong>Step</strong>: Run the simulation one time-step at a time.
+              This is useful when you want to keep a very close eye on the slug's 
+              behavior and watch how it changes in relation to the gauges.</li>
+              <li><strong>Pause</strong>: Stop the simulation, but don't reset it. 
+              The next time you hit Play, Fast Forward, or Step, the simulation 
+              will pick back up from where it left off.</li>
+            </ul>
+          </p>
+        </div> <!-- buttonrow -->
+        
+        <div 
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#dialrow'"
+            class="tutorialoverlay"
+            data-appear-after-delay="750"
+            data-disappear-on-mouseout="true"
+            >
+          <header>Prey Population Controls</header>
+          <p>
+            These dials allow you to set the populations of 
+            <span class="tutorialspan-morsel tutorialspan-hermi">
+              Hermissenda</span>,
+            <span class="tutorialspan-morsel tutorialspan-flab">
+              Flabellina</span>,
+            and 
+            <span class="tutorialspan-morsel tutorialspan-faux">
+              Faux Flabellina</span>. 
+            Each species can have between 0 and 15 specimens.
+          </p>
+          <p>
+            Specimens don't really die when they get eaten. They get 
+            taken to a happier place. That happier place is somewhere 
+            else in the environment far away from the Cyberslug.
+            That is, their positions get randomly regenerated, effectively
+            reincarnating each eaten animal. Therefore, the number of 
+            specimens of each species stays the same throughout the 
+            run of the simulation.
+          </p>
+          <p>
+            Your changes will take effect after you hit the "Stop" button.
+            You'll see your new prey populations the next time you 
+            run the simulation.
+          </p>
+        </div> <!-- dialrow -->          
+        
+        
+        
       </div> <!-- tutorial -->
     </div> <!-- container-fluid -->
 
