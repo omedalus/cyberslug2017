@@ -523,11 +523,11 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           <header>About Cyberslug 2017</header>
           <p>
             This software presents studies conducted by 
-            <a href="https://mcb.illinois.edu/faculty/profile/rhanor/">my lab</a>
+            <a href="https://mcb.illinois.edu/faculty/profile/rhanor/" target="_blank">my lab</a>
             in the School of Molecular and Cellular Biology 
             at the University of Illinois at Urbana-Champaign. 
             My research team includes Graduate Research Assistant
-            <a href="https://beckman.illinois.edu/directory/person/gribkov2">
+            <a href="https://beckman.illinois.edu/directory/person/gribkov2" target="_blank">
               Ekaterina D. Gribkova
             </a>.
           </p>
@@ -549,10 +549,123 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               I'll totally go read Mikhail's novel
             </button>
           </div>
-        </div>
+        </div> <!-- about -->
 
+        <div 
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#switch-info'"
+            id="tutorial-switch-info"
+            class="tutorialoverlay rhanorside"
+            data-appear-after-delay="750"
+            data-disappear-on-mouseout="true"
+            >
+          <header>About Cyberslug 2017</header>
+          <p>
+            Flip this switch if you don't want to keep seeing me 
+            pop up here anymore. Dont worry, though &mdash; I won't be far!
+            You can always flip it back on if you need me again.
+          </p>
+        </div> <!-- switch-info -->
 
-
+        <div 
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#feedingrow .lamp'"
+            id="tutorial-app-state"
+            class="tutorialoverlay"
+            data-appear-after-delay="750"
+            >
+          <header>Appetitive State Indicator</header>
+          <div class="tutorialpage" data-tutorial-page="0">
+            <p>
+              Our research has shown that, like a very simple robot,
+              the real-life <em>Pleurobranchaea</em> runs in 
+              discrete modes of operation. Two of those modes are
+              regulated by an internal "appetitive state switch".
+              To put it simply, you can think of these modes as
+              "Hungry" and "Not Hungry".
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialCtrl.nextPage()">
+                Next
+              </button>
+            </div>
+          </div>
+          <div class="tutorialpage" data-tutorial-page="1">
+            <p>
+              When the slug is sated, it actively avoids all food sources.
+              Indeed, when this "Hungry" light is off, try
+              picking up the slug and dragging it near a tasty green
+              <span class="tutorialspan-morsel tutorialspan-hermi">
+                Hermissenda
+              </span>, which has no natural defenses and represents
+              nothing but pure nutrients.
+              Like            
+              <a href="https://www.youtube.com/watch?v=FkpCP9R1Jjc">
+                Ryan Gosling refusing to eat his cereal
+              </a>, the slug will turn away from the delicious morsel.
+            </p>
+            <p>
+              Strategically, there are several good reasons for this.
+              One is that it's generally better to eat as few prey 
+              animals as you need, in order to preserve the prey population
+              for the future &mdash; predators that are too aggressive
+              risk exterminating their entire food supply. Another is 
+              for safety reasons &mdash; if the slug smells something
+              yummy nearby, then it's possible that other predators smell
+              it too, and if the slug is sated then it really doesn't 
+              need to risk a potentially lethal fight over a completely
+              superfluous pack of calories.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialCtrl.nextPage()">
+                Next
+              </button>
+            </div>
+          </div>
+          <div class="tutorialpage" data-tutorial-page="2">
+            <p>
+              But, like <a href="https://www.youtube.com/watch?v=MixNh9L7G5M">
+                Joe Pesci in a Snicker's commercial
+              </a>,
+              the slug acts different when it's hungry. When its stomach
+              is growling (yes, it has a stomach; no, it doesn't really growl),
+              it goes straight for the best meal it can find.
+            </p>
+            <p>
+              "Best" is a 
+              combination of primarily three factors: how far away the prey is,
+              how nutritious the prey is, and how much of a fight the prey 
+              is expected to put up (i.e. what kind of risks may be involved).
+              Usually, the slug will choose the safest meal it can reach, so 
+              it'll tend to prefer a distant 
+              <span class="tutorialspan-morsel tutorialspan-hermi">
+                Hermissenda
+              </span>
+              over a nearby 
+              <span class="tutorialspan-morsel tutorialspan-flab">
+                Flabellina
+              </span>.
+              But as it gets progressively hungrier, it starts to care less and
+              less about the risk &mdash; it needs those calories <em>now</em>!
+              Let it get hungry enough, and it'll devour Hermi and Flab 
+              alike, spines be damned.
+            </p>
+            <p>
+              We know that 
+              <a href="https://www.psychologytoday.com/blog/neuronarrative/201405/youre-not-yourself-when-youre-hungry-and-thats-problem">
+                humans act more or less the same way
+              </a>. That's why we research these animals &mdash;
+              because, for all our language and technology and culture and art 
+              and ability to program JavaScript applications, 
+              deep down we're really not all that different.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialCtrl.dismiss()">
+                OK
+              </button>
+            </div>
+          </div>
+        </div> <!-- app-state-indicator -->
         
   
       </div> <!-- tutorial -->

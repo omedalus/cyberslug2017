@@ -70,10 +70,9 @@ cyberslugApp.controller('TutorialCtrl', [
   };
   
   ctrl.dismiss = function() {
-    if (!ctrl.currentTutorialElement) {
-      return;
+    if (!!ctrl.dismissElement) {
+      ctrl.dismissElement();
     }
-    ctrl.currentTutorialElement.removeClass('showing');
   };
 }]);
 

@@ -12,6 +12,21 @@ cyberslugApp.directive('cyberslugTutorial', [
 
     var myAppearanceTimeout = null;
     
+    var cancelMyAppearance = function(ev) {
+      // Fix the vertical collapse problem that happens with elements
+      // with automatic height, i.e. ones that don't have Rhanor.
+      element.removeClass('showing');
+      $timeout(function() {
+        $(element).css({display: ''});
+      }, 500);
+      
+      if (!!myAppearanceTimeout) {
+        $timeout.cancel(myAppearanceTimeout);
+        myAppearanceTimeout = null;
+      }
+    };
+    
+    
     var makeMeAppear = function(ev) {
       if ($global && $global.tutorial && !$global.tutorial.active) {
         // Don't show if tutorial mode has been switched off.
@@ -50,6 +65,7 @@ cyberslugApp.directive('cyberslugTutorial', [
         
         tutorialCtrl.tutorialpage = 0;
         tutorialCtrl.currentTutorialElement = element;
+        tutorialCtrl.dismissElement = cancelMyAppearance;
         
         // Once we show, never show again if we aren't supposed to.
         if (!_.isUndefined(element[0].dataset.onlyShowOnce)) {
@@ -59,21 +75,6 @@ cyberslugApp.directive('cyberslugTutorial', [
         }
       }, appearanceDelay);
     };
-    
-    var cancelMyAppearance = function(ev) {
-      // Fix the vertical collapse problem that happens with elements
-      // with automatic height, i.e. ones that don't have Rhanor.
-      element.removeClass('showing');
-      $timeout(function() {
-        $(element).css({display: 'none'});
-      }, 500);
-      
-      if (!!myAppearanceTimeout) {
-        $timeout.cancel(myAppearanceTimeout);
-        myAppearanceTimeout = null;
-      }
-    };
-    
     
     scope.$watch('mouseoverTrigger', function(newValue, oldValue) {
       if (!!oldValue) {
