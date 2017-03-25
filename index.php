@@ -54,7 +54,10 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/glyph-pause-active.png"></img>
       <img src="img/glyph-info.png"></img>
       <img src="img/glyph-info-active.png"></img>
-      <img src="img/glyph-audio.png"></img>
+      <img src="img/glyph-audio-0.png"></img>
+      <img src="img/glyph-audio-1.png"></img>
+      <img src="img/glyph-audio-2.png"></img>
+      <img src="img/glyph-audio-3.png"></img>
       <img src="img/rca-jacks.png"></img>
       <img src="img/control-dial-base.png"></img>
       <img src="img/control-dial-knob.png"></img>
@@ -66,16 +69,60 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
       <img src="fonts/digital_counter_7.ttf"></img>
       
-      <audio id="audio-switch" src="audio/switch.mp3"></audio>
-      <audio id="audio-button" src="audio/button.mp3"></audio>
-      <audio id="audio-dialtick" src="audio/dialtick.wav"></audio>
-      <audio id="audio-squishypop" src="audio/squishypop.wav"></audio>
-      <audio id="audio-splatdown" src="audio/splat-quick.wav"></audio>
-      <audio id="audio-squishcrawl" src="audio/squishcrawl.wav"></audio>
-      <audio id="audio-eatslurp" src="audio/eatslurp-dehumanized.wav"></audio>
+      <audio id="audio-switch" 
+          src="audio/switch.mp3"
+          class="audio-interface"
+          data-audio-level="1"
+          ></audio>
+      <audio id="audio-button" 
+          src="audio/button.mp3"
+          class="audio-interface"
+          data-audio-level="1"
+          ></audio>
+      <audio id="audio-dialtick" 
+          src="audio/dialtick.wav"
+          class="audio-interface"
+          data-audio-level="1"
+          ></audio>
       
-      <audio id="audio-bgmusic" src="audio/172561__djgriffin__video-game-7.mp3" volume="0.5" loop="true"></audio>
-      <audio id="audio-bgmusic-fast" src="audio/369066__mrthenoronha__hurry-loop.mp3" volume="0.2" loop="true"></audio>
+      <audio id="audio-squishypop" 
+          src="audio/squishypop.wav"
+          class="audio-view"
+          data-audio-level="2"
+          ></audio>
+      <audio id="audio-splatdown" 
+          src="audio/splat-quick.wav"
+          class="audio-view"
+          data-audio-level="2"
+          ></audio>
+      <audio id="audio-squishcrawl" 
+          src="audio/squishcrawl.wav"
+          class="audio-view"
+          loop="true"
+          data-audio-level="2"
+          ></audio>
+      <audio id="audio-eatslurp" 
+          src="audio/eatslurp-dehumanized.wav"
+          class="audio-view"
+          data-audio-level="2"
+          ></audio>
+      
+      <audio id="audio-bgmusic" 
+          src="audio/172561__djgriffin__video-game-7.mp3" 
+          volume="0.5" 
+          loop="true"
+          class="audio-music"
+          data-exclusion-group="bgmusic"
+          data-audio-level="3"
+          ></audio>
+      <audio id="audio-bgmusic-fast" 
+          src="audio/369066__mrthenoronha__hurry-loop.mp3" 
+          volume="0.2" 
+          loop="true"
+          class="audio-music"
+          data-exclusion-group="bgmusic"
+          data-audio-level="3"
+          ></audio>
     </div>
     
     <div id="prefetch-placeholder" style="display:none">
@@ -105,11 +152,12 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
           <div data-ng-controller="MetacontrolsCtrl as metacontrolsCtrl"
               id="metacontrols" class="instrumentrow insetcontrolsrow">
             <div data-cyberslug-switch="metacontrolsCtrl.$global.tutorial.active" id="switch-info"></div>
-            <div data-cyberslug-dial="metacontrolsCtrl.$global.displaysettings.audiolevel" 
+            <div data-cyberslug-dial="metacontrolsCtrl.$global.audio.level" 
                 id="dial-audio"
                 data-min="0"
                 data-max="3"
-                data-tick-interval="1""
+                data-tick-interval="1"
+                data-on-change="metacontrolsCtrl.$global.audio.updateLevel"
             ></div>
           </div>
         </div>

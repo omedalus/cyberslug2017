@@ -45,7 +45,7 @@ cyberslugApp.directive('cyberslugDial', [
         $audio.playAudio('audio-dialtick');
         if (stopSoundInMs < 200) {
           setTimeout(function() {
-            $global.prefetch.stopAudio('audio-dialtick');
+            $audio.stopAudio('audio-dialtick');
           }, stopSoundInMs);
         }
         
@@ -80,6 +80,12 @@ cyberslugApp.directive('cyberslugDial', [
       $('.knob', element).css({
         transform: 'rotate(' + scalepos + 'deg)'
       });
+      
+      element[0].dataset.dialValue = 'value-' + newValue;
+      
+      if (!!scope.onChange) {
+        scope.onChange();
+      }
     });
     
     var rebuildTicks = function() {
@@ -132,7 +138,8 @@ cyberslugApp.directive('cyberslugDial', [
       tickInterval: '=',
       numberInterval: '=',
       label: '=',
-      tickArray: '='
+      tickArray: '=',
+      onChange: '='
     },
     link: link
   };

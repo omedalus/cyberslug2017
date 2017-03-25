@@ -223,17 +223,14 @@ cyberslugApp.directive('cyberslugGameCanvas', [
   };
   
   var playBackgroundMusic = function() {
-    if ($global.runstate === 'stop') {
-      $audio.stopAudio('audio-bgmusic');
-      $audio.stopAudio('audio-bgmusic-fast');
+    if ($global.runstate === 'play') {
+      $audio.playAudio('audio-bgmusic');
     } 
     else if ($global.runstate === 'ff') {
-      $audio.stopAudio('audio-bgmusic');
-      $audio.playAudio('audio-bgmusic-fast', true);
+      $audio.playAudio('audio-bgmusic-fast');
     }
     else {
-      $audio.playAudio('audio-bgmusic', true);
-      $audio.stopAudio('audio-bgmusic-fast');
+      $audio.stopAudioGroup('bgmusic');
     }       
   };
   

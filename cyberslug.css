@@ -620,9 +620,11 @@ label[for=feedinghistory] {
   position: absolute;
   bottom: -13px;
   left: 0;
-  background-image: url('img/glyph-audio.png');
   background-size: contain;
   background-position: center top;
   background-repeat: no-repeat;
+}
+#dial-audio::after {
+  background-image: url('img/glyph-audio.png');
 }
 
