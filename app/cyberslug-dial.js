@@ -1,7 +1,9 @@
 /* global $ */
 /* global cyberslugApp */
 
-cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
+cyberslugApp.directive('cyberslugDial', [
+    '$global', '$audio',
+    function($global, $audio) {
   var lastTimeAudioPlayed = new Date().getTime();
   var scaleposWhenLastAudioPlayed = 0;
   
@@ -40,7 +42,7 @@ cyberslugApp.directive('cyberslugDial', ['$global', function($global) {
         // Each click is fifty milliseconds.
         var stopSoundInMs = 50 * numClicksSounds;
         
-        $global.prefetch.playAudio('audio-dialtick');
+        $audio.playAudio('audio-dialtick');
         if (stopSoundInMs < 200) {
           setTimeout(function() {
             $global.prefetch.stopAudio('audio-dialtick');

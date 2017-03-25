@@ -3,8 +3,8 @@
 /* global cyberslugApp */
 
 cyberslugApp.directive('cyberslugGameCanvas', [
-    '$global', '$timeout', '$interval',
-    function($global, $timeout, $interval) {
+    '$global', '$timeout', '$interval', '$audio', 
+    function($global, $timeout, $interval, $audio) {
 
   var setCanvasZoom = function(context, element) {
     element = $(element);
@@ -216,24 +216,24 @@ cyberslugApp.directive('cyberslugGameCanvas', [
         !$global.world.hero.isBeingPickedUp;
     
     if (shouldPlaySquishCrawl) {
-      $global.prefetch.playAudio('audio-squishcrawl', true);
+      $audio.playAudio('audio-squishcrawl', true);
     } else {
-      $global.prefetch.stopAudio('audio-squishcrawl');
+      $audio.stopAudio('audio-squishcrawl');
     }
   };
   
   var playBackgroundMusic = function() {
     if ($global.runstate === 'stop') {
-      $global.prefetch.stopAudio('audio-bgmusic');
-      $global.prefetch.stopAudio('audio-bgmusic-fast');
+      $audio.stopAudio('audio-bgmusic');
+      $audio.stopAudio('audio-bgmusic-fast');
     } 
     else if ($global.runstate === 'ff') {
-      $global.prefetch.stopAudio('audio-bgmusic');
-      $global.prefetch.playAudio('audio-bgmusic-fast', true);
+      $audio.stopAudio('audio-bgmusic');
+      $audio.playAudio('audio-bgmusic-fast', true);
     }
     else {
-      $global.prefetch.playAudio('audio-bgmusic', true);
-      $global.prefetch.stopAudio('audio-bgmusic-fast');
+      $audio.playAudio('audio-bgmusic', true);
+      $audio.stopAudio('audio-bgmusic-fast');
     }       
   };
   
@@ -283,11 +283,11 @@ cyberslugApp.directive('cyberslugGameCanvas', [
     var setHeroPickupState = function(newState) {
       if ($global.world.hero.isBeingPickedUp && !newState) {
         // He was being picked up, but not anymore.
-        $global.prefetch.playAudio('audio-splatdown');
+        $audio.playAudio('audio-splatdown');
       }
       else if (!$global.world.hero.isBeingPickedUp && newState) {
         // He just got picked up.
-        $global.prefetch.playAudio('audio-squishypop');
+        $audio.playAudio('audio-squishypop');
       }
       
       $global.world.hero.isBeingPickedUp = newState;

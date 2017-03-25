@@ -153,8 +153,8 @@ var getWorld = null;
       
       // Play the eating noise. It sucks to mix interface into here, but
       // it's good enough.
-      if (world.global && world.global.prefetch) {
-        world.global.prefetch.playAudio('audio-eatslurp');
+      if (world.global && world.global.audio) {
+        world.global.audio.playAudio('audio-eatslurp');
       }
       
       // "Remove" the prey from the world, but reincarnate it nearby.

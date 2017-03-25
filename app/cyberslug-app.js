@@ -6,12 +6,13 @@ cyberslugApp.ANIMATIONS = {};
 
 
 cyberslugApp.controller('SetupCtrl', [
-    '$scope', '$global', function($scope, $global) 
+    '$scope', '$global', '$audio',
+    function($scope, $global, $audio) 
 {
   var ctrl = this;
   ctrl.$global = $global;
-  ctrl.$global = $global;
-  
+  $scope.$global = $global;
+
   $scope.$watch('$global.world.hero', function(newValue) {
     ctrl.hero = newValue;
   });
@@ -23,12 +24,13 @@ cyberslugApp.controller('SetupCtrl', [
       return;
     }
     ctrl.$global.runstate = buttonid;
-    $global.prefetch.playAudio('audio-button');
+    $audio.playAudio('audio-button');
   };
 }]);
 
 cyberslugApp.controller('ReadoutCtrl', [
-    '$scope', '$global', function($scope, $global) 
+    '$scope', '$global', '$audio', 
+    function($scope, $global, $audio) 
 {
   var ctrl = this;
   ctrl.$global = $global;
@@ -45,7 +47,7 @@ cyberslugApp.controller('MetacontrolsCtrl', [
 {
   var ctrl = this;
   ctrl.$global = $global;
-  ctrl.$global = $global;
+  $scope.$global = $global;
   
   $scope.$watch('$global.world.hero', function(newValue) {
     ctrl.hero = newValue;

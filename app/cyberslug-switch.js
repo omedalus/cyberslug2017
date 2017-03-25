@@ -1,15 +1,15 @@
 /* global $ */
 /* global cyberslugApp */
 
-cyberslugApp.directive('cyberslugSwitch', ['$global', function($global) {
+cyberslugApp.directive('cyberslugSwitch', [
+    '$global', '$audio', 
+    function($global, $audio) {
   var link = function(scope, element, attrs) {
     $(element).addClass('switch');
     $(element).append('<label/>');    
     
     scope.$global = $global;
-    
-    
-    
+
     scope.$watch('cyberslugSwitch', function(newValue, oldValue) {
       $(element).removeClass('switchon switchoff');
       if (!!newValue) {
@@ -33,7 +33,7 @@ cyberslugApp.directive('cyberslugSwitch', ['$global', function($global) {
     
     $(element).click(function() {
       scope.cyberslugSwitch = !scope.cyberslugSwitch;
-      $global.prefetch.playAudio('audio-switch');
+      $audio.playAudio('audio-switch');
     });
   };
   

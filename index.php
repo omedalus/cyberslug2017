@@ -16,6 +16,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
     <script src="app/cyberslug-app.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-global.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-audio.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-dial.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-gauge.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-switch.js?nocache=<?php echo time(); ?>"></script>
