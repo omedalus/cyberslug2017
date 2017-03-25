@@ -22,6 +22,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
     <script src="app/cyberslug-switch.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-game-canvas.js?nocache=<?php echo time(); ?>"></script>
     <script src="app/cyberslug-prefetch.js?nocache=<?php echo time(); ?>"></script>
+    <script src="app/cyberslug-tutorial.js?nocache=<?php echo time(); ?>"></script>
 
     <title>Cyberslug 2017</title>
   </head>
@@ -66,6 +67,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
       <img src="img/red-light-on.png"></img>
       <img src="img/switch-down.png"></img>
       <img src="img/switch-up.png"></img>
+
+      <img src="img/rhanor/rhanor-noise/rhanor-noise.gif"></img>
 
       <img src="fonts/digital_counter_7.ttf"></img>
       
@@ -300,8 +303,153 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
 
         </div>
       </div>
-
+      
+      
+      <div id="tutorial">
+        <div 
+            data-cyberslug-tutorial="'body'"
+            class="tutorialoverlay rhanorside"
+            data-appear-after="750"
+            >
+          <header>Introduction</header>
+          <div class="tutorialpage" data-tutorial-page="0">
+            <p>
+              Welcome to the lab!
+            </p>
+            <p>
+              I'm <a href="https://mcb.illinois.edu/faculty/profile/rhanor/" target="_blank">Dr. Rhanor Gillette</a>,  
+              Emeritus Professor of Molecular and Integrative 
+              Physiology at the University of Illinois 
+              at Urbana-Champaign.
+            </p>
+            <p>
+              I'll be showing you around the equipment and 
+              teaching you how everything works here.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialpage = tutorialpage + 1">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 0 -->
+          <div class="tutorialpage" data-tutorial-page="1">
+            <p>
+              Our research focuses on the brain of an animal called
+              <em>Pleurobranchaea californica.</em>
+            </p>
+            <p>
+              It's a 
+              <a href="http://www.seaslugforum.net/find/pleucali" target="_blank">sea slug</a>, 
+              about the size of a grapefruit. It lives in the Pacific
+              Ocean, where it spends its time crawling along the ocean
+              floor hunting tasty morsels. While it will try to eat 
+              anything that moves, its most common prey is other smaller
+              sea slugs like <em>Flabellina</em> and <em>Hermissenda</em>. 
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialpage = tutorialpage + 1">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 1 -->
+          <div class="tutorialpage" data-tutorial-page="2">
+            <p>
+              Its brain is pretty small and simple &mdash; altogether, it's only 
+              several thousand neurons. And yet with this tiny brain, the 
+              <em>Pleurobranchaea</em> performs some relatively 
+              nontrivial decision-making, and is even capable of 
+              learning from experience! If we can crack exactly how it does this,
+              we might learn a lot about how our own brains work &mdash;
+              the human brain has over ten billion neurons, but 
+              the principles of operation aren't necessarily all that different.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialpage = tutorialpage + 1">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 2 --> 
+          <div class="tutorialpage" data-tutorial-page="3">
+            <p>
+              We've charted enough of this creature's brain to build a 
+              software simulation of some of its decision-making circuitry.
+              That's what you're looking at right now.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialpage = tutorialpage + 1">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 3 --> 
+          <div class="tutorialpage" data-tutorial-page="4">
+            <p>
+              In this computer model, the <em>Pleurobranchaea</em>
+              forages amongst three different kinds of prey.
+            </p>
+            <p>
+              <span style="color:#0c0; font-weight:bold">
+                Hermissenda
+              </span>
+              are nutritious and lack natural defenses, so they're 
+              Cyberslug's favorite food.
+            </p>
+            <p>
+              <span style="color:#c00; font-weight:bold">
+                Flabellina
+              </span>
+              are just as nutritious, but have toxic spines.
+              Cyberslug will only approach them if it's incredibly 
+              hungry.
+            </p>
+            <p>
+              <span style="color:#66c; font-weight:bold">
+                Faux
+              </span>
+              is a Batesian mimic. It exudes a chemical odor signature
+              (i.e. smells) like <em>Flabellina</em>,
+              but doesn't have those toxic spines.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialpage = tutorialpage + 1">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 4 -->
+          <div class="tutorialpage" data-tutorial-page="5">
+            <p>
+              We've charted enough of this creature's brain to build a 
+              software simulation of some of its decision-making circuitry.
+              That's what you're looking at right now.
+            </p>
+            <div class="buttonrow">
+              <button data-ng-click="tutorialpage = tutorialpage + 1">
+                Next
+              </button>
+            </div>
+          </div> <!-- page 5 -->
+        </div> <!-- intro -->
+  
+        <div 
+            data-cyberslug-tutorial="'#dial-audio'"
+            class="tutorialoverlay"
+            data-appear-after="750"
+            data-disappear-on-mouseout="true"
+            >
+          <header>Audio Control</header>
+          <p>
+            This dial adjusts the audio levels of the Cyberslug 2017 lab.
+            It has four notches.
+            <ul>
+              <li><em>Max</em>: Background music, slug noises, and interface noises.</li>
+              <li><em>No music</em>: Slug noises and interface noises only.</li>
+              <li><em>Interface</em>: Only the equipment's controls make sounds.</li>
+              <li><em>Silence</em>: No audio.</li>
+            </ul>
+          </p>
+        </div>
+  
+      </div> <!-- tutorial -->
     </div> <!-- container-fluid -->
+
   </body>
-    
 </html>

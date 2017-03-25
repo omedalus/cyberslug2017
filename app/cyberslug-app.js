@@ -55,3 +55,11 @@ cyberslugApp.controller('MetacontrolsCtrl', [
 }]);
 
 
+cyberslugApp.controller('TutorialCtrl', [
+    '$scope', '$global', function($scope, $global) 
+{
+  var ctrl = this;
+  ctrl.$global = $global;
+  $scope.$global = $global;
+}]);
+

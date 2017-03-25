@@ -628,3 +628,81 @@ label[for=feedinghistory] {
   background-image: url('img/glyph-audio.png');
 }
 
+
+
+.tutorialoverlay {
+  position: fixed;
+  background-color: #060;
+  background-color: rgba(0,32,0,.8);
+  top: 60px;
+  left: 60px;
+  width: 600px;
+  border: 2px solid #060;
+  border-radius: 20px;
+  padding: 10px 20px;
+  box-shadow: 0 0 20px #020;
+  color: #4a4;
+  font-family: serif;
+  font-size: large;
+  user-select: initial;
+  cursor: initial;
+
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 99999;
+  transition: opacity .25s linear;
+}
+.tutorialoverlay.showing {
+  height: auto;
+  opacity: 1;
+  z-index: auto;
+}
+
+.rhanorside::before {
+  content: '';
+  background: url('img/rhanor/rhanor-noise/rhanor-noise.gif');
+  background-size: 300px;
+  background-position: -40px top;
+  background-repeat: no-repeat;
+  width: 220px;
+  height: 300px;
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+.rhanorside {
+  padding-left: 220px;
+  min-height: 240px;
+}
+
+.tutorialoverlay header {
+  font-weight: bold;
+  font-size: x-large;
+  color: #6c6;
+}
+
+.tutorialoverlay a {
+  color: #6c6;
+  font-weight: bold;
+}
+
+.tutorialoverlay .buttonrow {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.tutorialoverlay button {
+  border-radius: 5px;
+  border: 2px solid;
+  background: transparent;
+  padding: 0 20px;
+  background: #002a00;
+}
+.tutorialoverlay button:hover {
+  background: #003a00;
+}
+.tutorialoverlay button:active {
+  color: #cfc;
+}
