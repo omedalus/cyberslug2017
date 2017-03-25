@@ -43,7 +43,11 @@ cyberslugApp.directive('cyberslugTutorial', [
           return;
         }
 
-        element.addClass('showing');
+        $(element).css({display: 'inherit'});
+        $timeout(function() {
+          element.addClass('showing');
+        }, 100);
+        
         tutorialCtrl.tutorialpage = 0;
         tutorialCtrl.currentTutorialElement = element;
         
@@ -53,20 +57,16 @@ cyberslugApp.directive('cyberslugTutorial', [
         } else {
           delete element[0].dataset.neverShow;
         }
-        
-        // Undo the height-collapse fix.
-        element.css({height: ''});
       }, appearanceDelay);
     };
     
     var cancelMyAppearance = function(ev) {
       // Fix the vertical collapse problem that happens with elements
       // with automatic height, i.e. ones that don't have Rhanor.
-      element.css({
-        height: element.height() + 'px'
-      });
-
       element.removeClass('showing');
+      $timeout(function() {
+        $(element).css({display: 'none'});
+      }, 500);
       
       if (!!myAppearanceTimeout) {
         $timeout.cancel(myAppearanceTimeout);

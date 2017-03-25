@@ -644,17 +644,17 @@ label[for=feedinghistory] {
   color: #4a4;
   font-family: serif;
   font-size: large;
+  line-height: 120%;
   user-select: initial;
   cursor: initial;
 
-  height: 0;
+  display: none;
   overflow: hidden;
   opacity: 0;
   z-index: 99999;
   transition: opacity .25s linear;
 }
 .tutorialoverlay.showing {
-  height: auto;
   opacity: 1;
   z-index: auto;
   overflow: visible;
@@ -682,6 +682,7 @@ label[for=feedinghistory] {
   font-weight: bold;
   font-size: x-large;
   color: #6c6;
+  margin-bottom: 20px;
 }
 
 .tutorialoverlay a {

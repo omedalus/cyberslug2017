@@ -490,8 +490,6 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               <img src="img/downwards_glowing_green_arrow.png"></img>
             </div>
           </div> <!-- page 7 -->
-          
-          
         </div> <!-- intro -->
   
         <div 
@@ -513,7 +511,49 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
               <li><em>Silence</em>: No audio.</li>
             </ul>
           </p>
+        </div> <!-- dial-audio -->
+        
+        <div 
+            data-cyberslug-tutorial=""
+            data-mouseover-trigger="'#canvasnameplate'"
+            id="tutorial-canvasnameplate"
+            class="tutorialoverlay rhanorside"
+            data-appear-after-delay="750"
+            >
+          <header>About Cyberslug 2017</header>
+          <p>
+            This software presents studies conducted by 
+            <a href="https://mcb.illinois.edu/faculty/profile/rhanor/">my lab</a>
+            in the School of Molecular and Cellular Biology 
+            at the University of Illinois at Urbana-Champaign. 
+            My research team includes Graduate Research Assistant
+            <a href="https://beckman.illinois.edu/directory/person/gribkov2">
+              Ekaterina D. Gribkova
+            </a>.
+          </p>
+          
+          <p>
+            Cyberslug was developed by Mikhail Voloshin,
+            a computational neuroscience graduate student of mine from 
+            back in 2000. He's since gone on to work at 
+            Microsoft, Google, a few dot-coms, and 
+            a couple of hedge funds. 
+            
+            <a href="https://www.amazon.com/dp/1533001731/" target="_blank">He's even written a novel!</a>
+            It's called 
+            <a href="https://www.amazon.com/dp/1533001731/" target="_blank"><em>Dopamine</em></a>. 
+            You should go check it out!
+          </p>
+          <div class="buttonrow">
+            <button data-ng-click="tutorialCtrl.dismiss()">
+              I'll totally go read Mikhail's novel
+            </button>
+          </div>
         </div>
+
+
+
+        
   
       </div> <!-- tutorial -->
     </div> <!-- container-fluid -->
