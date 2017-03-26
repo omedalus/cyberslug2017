@@ -409,7 +409,7 @@
 
 <div 
     data-cyberslug-tutorial=""
-    data-mouseover-trigger="'#dialrow'"
+    data-mouseover-trigger="'#dialrow .dial'"
     class="tutorialoverlay"
     data-appear-after-delay="750"
     data-disappear-on-mouseout="true"
@@ -751,14 +751,111 @@
     data-mouseover-trigger="'#gauge-v-hermi, #gauge-v-flab'"
     class="tutorialoverlay"
     data-appear-after-delay="750"
-    data-disappear-on-mouseout="true"
     >
   <header>Learning Gauges</header>
-  <p>
-    The V<sub>hermi</sub> and V<sub>flab</sub> gauges measure
-    a pair of internal values that represent the slug's ability 
-    to learn from experience.
-  </p>
+  <div class="tutorialpage" data-tutorial-page="0">
+    <p>
+      The V<sub>hermi</sub> and V<sub>flab</sub> gauges measure
+      a pair of internal values that represent the slug's ability 
+      to learn from experience. 
+      V<sub>hermi</sub> tracks a reward signal, 
+      and represents a slug's eagerness to veer <em>toward</em>
+      the green-cloud odor signature of 
+      a defenseless, nutritious
+      <span class="tutorialspan-morsel tutorialspan-hermi">
+        Hermissenda</span>. 
+      V<sub>flab</sub> tracks a punishment signal, 
+      and represents a slug's eagerness to veer <em>away from</em> 
+      the red-cloud odor signature
+      a spiny, aggressive
+      <span class="tutorialspan-morsel tutorialspan-flab">
+        Flabellina</span>. 
+    </p>
+    <p>
+      In general, these gauges quickly both converge to 1 &mdash;
+      the slug quickly learns the obvious conclusion: that Hermi 
+      scent trails are good to follow, while Flab scent trails are 
+      good to steer clear of.
+    </p>
+    <div class="buttonrow">
+      <button data-ng-click="tutorialCtrl.nextPage()">
+        Next
+      </button>
+    </div>
+  </div>
+  <div class="tutorialpage" data-tutorial-page="1">
+    <p>
+      A noteworthy temporary exception to this rule happens when
+      a very hungry slug, out of desperation, tracks a red scent trail...
+      and eats not a Flab but its Batesian mimic, a 
+      <span class="tutorialspan-morsel tutorialspan-faux">
+        Faux Flabellina</span>. 
+    </p>
+    <p>
+      The Faux smells just like a Flab, but it lacks the Flab's 
+      defensive spines. The Cyberslug expects to pay the price of 
+      a certain punishment when it bites into the source of a "red"
+      odor signature, but instead it receives nothing but pure 
+      wholesome nutrition.
+    </p>
+    <p>
+      This causes the Cyberslug to reduce its avoidance response from 
+      the Flabellina (V<sub>flab</sub>), sometimes by dramatic margins. 
+      If it happens multiple times, the Cyberslug may lose its fear 
+      of Flabellina altogether.
+    </p>
+    <div class="buttonrow">
+      <button data-ng-click="tutorialCtrl.nextPage()">
+        Next
+      </button>
+    </div>
+  </div>
+  <div class="tutorialpage" data-tutorial-page="2">
+    <p>
+      From an ecological standpoint, this illustrates the tenuous balance
+      that Batesian mimics must maintain with the creatures they're mimicking.
+      The Faux is a weak, helpless thing whose sole protection is that 
+      predators recognize that it "smells like"
+      something else that's dangerous. If the Faux were to get too numerous, 
+      then its predators would correctly "unlearn" the association between its odor 
+      and danger. This, in turn, would not only be bad for the Faux, but for 
+      the Flabellina as well. 
+    </p>
+    <p>
+      After all, Batesian mimicry can be seen as a form 
+      of parasitism; the Faux gains an "unfair" advantage over the Flabellina 
+      by warding off predators with the Flabellina's scent but without paying 
+      the metabolic cost of having to grow toxic spines. And, like most parasitic 
+      relationships, it's harmful to the "host" &mdash; after all, if predators
+      like <em>Pleurobranchaea</em> learn not to fear the Flabellina's scent
+      because of the preponderance of Faux,
+      then that not only undermines the whole point of Faux's mimicry, but it 
+      also doesn't bode well for the Flabellina.
+    </p>
+    <div class="buttonrow">
+      <button data-ng-click="tutorialCtrl.nextPage()">
+        Next
+      </button>
+    </div>
+  </div>
+  <div class="tutorialpage" data-tutorial-page="3">
+    <p>
+      This effect is worth seeing for yourself. Go up to the row of dials 
+      marked "Hermi/Flab/Faux", and adjust the populations of the various prey 
+      species. Then reset the simulation by hitting "Stop" and then "Play". Watch the 
+      "Eaten" counters down at the bottom. Notice how, when Faux
+      are rare, the slug will prefer to eat Hermis, even if they're much less 
+      common than anything else. But if the population of Faux is high, then 
+      notice how V<sub>flab</sub> never gets particularly high, 
+      and the prowling Cyberslug 
+      devours Hermi, Flab, and Faux alike.
+    </p>
+    <div class="buttonrow">
+      <button data-ng-click="tutorialCtrl.dismiss()">
+        OK
+      </button>
+    </div>
+  </div>
 </div> <!-- gauge-somatic-map -->
 
 
